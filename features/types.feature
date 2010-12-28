@@ -1,16 +1,11 @@
 Feature: Schema Types
   Scenario: string
-    When the schema is:
-    When this is the JSON:
+    Given this JSON:
       """
+      {"announcement": "hello, world"}
       """
     Then the JSON should conform to this schema:
       """
+      { "type": "string" }
       """
-    Given this schema:
-      """
-      """
-    Then this JSON should be conformant:
-      """
-      """
-    The the JSON should conform to the schema
+
