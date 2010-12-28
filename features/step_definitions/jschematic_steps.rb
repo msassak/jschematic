@@ -1,17 +1,8 @@
-Given "this JSON:" do |json|
-  @json = parse(json)
-end
-
-Then "the JSON should conform to this schema:" do |schema|
-  @schema = parse(schema)
-  assert_valid(@json, @schema)
-end
-
-When "this is the schema:" do |schema|
+When "the schema is:" do |schema|
   @schema = parse(schema)
 end
 
-Then "this should be acceptable JSON:" do |json|
+Then "this JSON should be correct:" do |json|
   @json = parse(json)
   assert_valid(@json, @schema)
 end

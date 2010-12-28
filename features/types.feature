@@ -1,50 +1,51 @@
 Feature: Schema Types
   Scenario: string
-    Given this JSON:
-      """
-      "hello, world"
-      """
-    Then the JSON should conform to this schema:
+    When the schema is:
       """
       { "type": "string" }
       """
+    Then this JSON should be correct:
+      """
+      "hello, world"
+      """
 
   Scenario: object
-    When this is the schema:
+    When the schema is:
       """
       { "type": "object" }
       """
-    Then this should be acceptable JSON:
+    Then this JSON should be correct:
       """
       { "person": "felizberto" }
       """
 
   Scenario: array
-    Given this JSON:
-      """
-      ["foo", "bar", "baz"]
-      """
-    Then the JSON should conform to this schema:
+    When the schema is:
       """
       { "type": "array" }
       """
+    Then this JSON should be correct:
+      """
+      ["foo", "bar", "baz"]
+      """
 
   Scenario: number
-    Given this JSON:
-      """
-      3.14159
-      """
-    Then the JSON should conform to this schema:
+    When the schema is:
       """
       { "type": "number" }
       """
-
+    Then this JSON should be correct:
+      """
+      3.14159
+      """
+    
   Scenario: integer
-    Given this JSON:
-      """
-      2112
-      """
-    Then the JSON should conform to this schema:
+    When the schema is: 
       """
       { "type": "integer" }
       """
+    Then this JSON should be correct:
+      """
+      2112
+      """
+
