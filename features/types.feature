@@ -1,13 +1,7 @@
 Feature: Schema Types
   Scenario: string
-    When the schema is:
-      """
-      { "type": "string" }
-      """
-    Then this JSON should be correct:
-      """
-      "hello, world"
-      """
+    When the schema is '{ "type": "string" }'
+    Then '"hello, world"' should be correct JSON
 
   Scenario: object
     When the schema is:
