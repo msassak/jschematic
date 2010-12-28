@@ -28,3 +28,23 @@ Feature: Schema Types
       """
       { "type": "array" }
       """
+
+  Scenario: number
+    Given this JSON:
+      """
+      3.14159
+      """
+    Then the JSON should conform to this schema:
+      """
+      { "type": "number" }
+      """
+
+  Scenario: integer
+    Given this JSON:
+      """
+      2112
+      """
+    Then the JSON should conform to this schema:
+      """
+      { "type": "integer" }
+      """
