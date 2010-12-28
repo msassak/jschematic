@@ -8,3 +8,17 @@ Feature: Schema Types
       """
       { "type": "string" }
       """
+
+  Scenario: object
+    Given this JSON:
+      """
+      { 
+          "person": { 
+              "name": "felizberto" 
+          } 
+      }
+      """
+    Then the JSON should conform to this schema:
+      """
+      { "type": "object" }
+      """
