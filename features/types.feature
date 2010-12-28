@@ -10,13 +10,13 @@ Feature: Schema Types
       """
 
   Scenario: object
-    Given this JSON:
-      """
-      { "person": "felizberto" }
-      """
-    Then the JSON should conform to this schema:
+    When this is the schema:
       """
       { "type": "object" }
+      """
+    Then this should be acceptable JSON:
+      """
+      { "person": "felizberto" }
       """
 
   Scenario: array
