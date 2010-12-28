@@ -12,6 +12,7 @@ GEM
     gherkin (2.3.3)
       json (~> 1.4.6)
     json (1.4.6)
+    jsonschema (2.0.0)
     rspec (2.3.0)
       rspec-core (~> 2.3.0)
       rspec-expectations (~> 2.3.0)
@@ -28,5 +29,6 @@ PLATFORMS
 
 DEPENDENCIES
   cucumber
+  jsonschema
   rspec
   yajl-ruby

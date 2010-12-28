@@ -2,7 +2,7 @@ Feature: Schema Types
   Scenario: string
     Given this JSON:
       """
-      { "announcement": "hello, world" }
+      "hello, world"
       """
     Then the JSON should conform to this schema:
       """
@@ -12,13 +12,19 @@ Feature: Schema Types
   Scenario: object
     Given this JSON:
       """
-      { 
-          "person": { 
-              "name": "felizberto" 
-          } 
-      }
+      { "person": "felizberto" }
       """
     Then the JSON should conform to this schema:
       """
       { "type": "object" }
+      """
+
+  Scenario: array
+    Given this JSON:
+      """
+      ["foo", "bar", "baz"]
+      """
+    Then the JSON should conform to this schema:
+      """
+      { "type": "array" }
       """

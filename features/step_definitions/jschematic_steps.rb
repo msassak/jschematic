@@ -15,7 +15,8 @@ module JschematicWorld
   end
 
   def assert_valid(json, schema)
-    json.values.first.should be_a_kind_of(constantize(schema["type"].capitalize))
+    JSON::Schema.validate(json, schema) # sanity check
+    json.should be_a_kind_of(constantize(schema["type"].capitalize))
   end
 
   def constantize(string)
