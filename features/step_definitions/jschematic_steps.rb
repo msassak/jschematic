@@ -1,8 +1,17 @@
+When /^the schema is '(.+)'$/ do |schema|
+  @schema = parse(schema)
+end
+
 When "the schema is:" do |schema|
   @schema = parse(schema)
 end
 
-Then "this JSON should be correct:" do |json|
+Then /^'(.+)' should be acceptable JSON$/ do |json|
+  @json = parse(json)
+  assert_valid(@json, @schema)
+end
+
+Then "this JSON should be acceptable:" do |json|
   @json = parse(json)
   assert_valid(@json, @schema)
 end
