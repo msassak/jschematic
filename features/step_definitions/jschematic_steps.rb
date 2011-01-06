@@ -11,7 +11,7 @@ Then /^'(.+)' should be acceptable JSON$/ do |json|
   assert_valid(@json, @schema)
 end
 
-Then "this JSON should be acceptable:" do |json|
+Then "this should be acceptable JSON:" do |json|
   @json = parse(json)
   assert_valid(@json, @schema)
 end
@@ -24,8 +24,8 @@ module JschematicWorld
   end
 
   def assert_valid(json, schema)
-    JSON::Schema.validate(json, schema) # sanity check
-
+    assert_sanity(json, schema)
+    
     type = schema["type"].capitalize
     klass = case
             when type == "Object"
@@ -39,6 +39,10 @@ module JschematicWorld
             end
 
     json.should be_an_instance_of(klass)
+  end
+
+  def assert_sanity(json, schema)
+    JSON::Schema.validate(json, schema)
   end
 
   def constantize(string)

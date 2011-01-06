@@ -5,14 +5,14 @@ Feature: Schema Types
 
   Scenario: object
     When the schema is '{ "type": "object" }'
-    Then this JSON should be acceptable:
+    Then this should be acceptable JSON:
       """
       { "person": "felizberto" }
       """
 
   Scenario: array
     When the schema is '{ "type": "array" }'
-    Then this JSON should be acceptable:
+    Then this should be acceptable JSON:
       """
       ["foo", "bar", "baz"]
       """
