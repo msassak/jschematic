@@ -1,5 +1,5 @@
 Feature: Schema Properties
-  Scenario: With string property
+  Scenario: With type attribute
     When the schema is:
       """
       {
@@ -10,6 +10,18 @@ Feature: Schema Properties
       """
       Then '{ "name": "Felizberto" }' is acceptable JSON
       But '{ "name": 12345" }' is not acceptable JSON
+
+  Scenario: With maximum attribute
+    When the schema is:
+      """
+      {
+          "properties": {
+              "age": { "maximum": 25 }
+          }
+      }
+      """
+      Then '{ "age": 25 }' is acceptable JSON
+      But '{ "age": 26 }' is not acceptable JSON
 
   @ignore
   Scenario: possible useful syntax

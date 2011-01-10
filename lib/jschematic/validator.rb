@@ -29,11 +29,17 @@ module Jschematic
       json.instance_of?(klass)
     end
 
+    def maximum_valid?(max, num)
+      return true unless max
+      num <= max
+    end
+
     def properties_valid?(schema, json)
       return true unless schema
 
       schema.all? do |property, schema|
-        type_valid?(schema["type"], json[property])
+        type_valid?(schema["type"], json[property]) &&
+          maximum_valid?(schema["maximum"], json[property])
       end
     end
 
