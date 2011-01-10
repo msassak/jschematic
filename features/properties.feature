@@ -16,6 +16,7 @@ Feature: Schema Properties
       Then '{ "name": "Felizberto" }' is acceptable JSON
       But '{ "name": 12345" }' is not acceptable JSON
 
+  @ignore
   Scenario: possible useful syntax
     Given the schema is:
       """

@@ -7,7 +7,14 @@ module Jschematic
     end
 
     def valid?
-      type = schema["type"].capitalize
+      [
+        type_valid?(schema["type"], json)
+      ].all? { |res| res == true }
+    end
+
+    def type_valid?(type, json)
+      return true unless type # always pass if type doesn't exist
+      type.capitalize!
       klass = case
               when type == "Object"
                 Hash
