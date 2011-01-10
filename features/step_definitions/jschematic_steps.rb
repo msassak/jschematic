@@ -16,6 +16,11 @@ Then "this is acceptable JSON:" do |json|
   assert_valid(@json, @schema)
 end
 
+Then /^'(.+)' is not acceptable JSON$/ do |json|
+  @json = parse(json)
+  assert_invalid(@json, @schema)
+end
+
 module JschematicWorld
   def parse(json)
     Yajl::Parser.parse(json)
@@ -24,7 +29,7 @@ module JschematicWorld
   end
 
   def assert_valid(json, schema)
-    assert_sanity(json, schema)
+    assert_sanity(json, schema, true)
     
     type = schema["type"].capitalize
     klass = case
@@ -41,8 +46,14 @@ module JschematicWorld
     json.should be_an_instance_of(klass)
   end
 
-  def assert_sanity(json, schema)
+  def assert_invalid(json, schema)
+    assert_sanity(json, schema, false)
+  end
+
+  def assert_sanity(json, schema, expect_valid=true)
     JSON::Schema.validate(json, schema)
+  rescue JSON::Schema::ValueError => e
+    raise e if expect_valid
   end
 
   def constantize(string)

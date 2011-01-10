@@ -13,10 +13,8 @@ Feature: Schema Properties
           }
       }
       """
-    Then this is acceptable JSON:
-      """
-      { "name": "Felizberto" }
-      """
+      Then '{ "name": "Felizberto" }' is acceptable JSON
+      But '{ "name": 12345" }' is not acceptable JSON
 
   Scenario: possible useful syntax
     Given the schema is:
