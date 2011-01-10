@@ -13,7 +13,7 @@ Feature: Schema Properties
           }
       }
       """
-    Then this should be acceptable JSON:
+    Then this is acceptable JSON:
       """
       { "name": "Felizberto" }
       """
