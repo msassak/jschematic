@@ -8,7 +8,8 @@ module Jschematic
 
     def valid?
       [
-        type_valid?(schema["type"], json)
+        type_valid?(schema["type"], json),
+        properties_valid?(schema["properties"], json)
       ].all? { |res| res == true }
     end
 
@@ -26,6 +27,14 @@ module Jschematic
                 constantize(type)
               end
       json.instance_of?(klass)
+    end
+
+    def properties_valid?(schema, json)
+      return true unless schema
+
+      schema.all? do |property, schema|
+        type_valid?(schema["type"], json[property])
+      end
     end
 
     private
