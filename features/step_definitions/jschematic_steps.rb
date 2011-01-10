@@ -30,34 +30,20 @@ module JschematicWorld
 
   def assert_valid(json, schema)
     assert_sanity(json, schema, true)
-    
-    type = schema["type"].capitalize
-    klass = case
-            when type == "Object"
-              Hash
-            when type == "Number"
-              Float # or Fixnum or Bignum
-            when type == "Integer"
-              Fixnum # or Bignum 
-            else
-              constantize(type)
-            end
-
-    json.should be_an_instance_of(klass)
+    validator = Jschematic::Validator.new(schema, json)
+    validator.should be_valid
   end
 
   def assert_invalid(json, schema)
     assert_sanity(json, schema, false)
+    validator = Jschematic::Validator.new(schema, json)
+    validator.should_not be_valid
   end
 
   def assert_sanity(json, schema, expect_valid=true)
     JSON::Schema.validate(json, schema)
   rescue JSON::Schema::ValueError => e
     raise e if expect_valid
-  end
-
-  def constantize(string)
-    Kernel.const_get(string)
   end
 end
 
