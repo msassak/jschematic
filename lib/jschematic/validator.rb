@@ -9,7 +9,7 @@ module Jschematic
     def valid?
       [
         type_valid?(schema["type"], json),
-        minimum_valid?(schema["minimum"], json),
+        minimum_valid?(*schema.values_at("minimum", "exclusiveMinimum"), json),
         properties_valid?(schema["properties"], json)
       ].all? { |res| res == true }
     end
@@ -31,9 +31,15 @@ module Jschematic
       json.instance_of?(klass)
     end
 
-    def minimum_valid?(min, num)
+    def minimum_valid?(min, exclusive, num)
       return true unless min
-      num >= min
+      return true unless (num.kind_of?(Integer) || num.kind_of?(Float))
+
+      if exclusive
+        num > min
+      else
+        num >= min
+      end
     end
 
     def maximum_valid?(max, num)
