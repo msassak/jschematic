@@ -3,9 +3,19 @@ require 'spec_helper'
 module Jschematic
   module Attributes
     describe Type do
+      context "string" do
+        subject { Type.new("string") }
+        it { should_not accept(nil) }
+      end
+
       context "number" do
         subject { Type.new("number") }
+        it { should_not accept(nil) }
         it { should accept(2112) }
+      end
+
+      context "integer" do 
+        subject { Type.new("integer") }
         it { should_not accept(nil) }
       end
 

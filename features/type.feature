@@ -1,6 +1,5 @@
 @sanity_check
 Feature: Core Schema: type
-  TODO: (the primitives listed above do not allow nulls on their own)
 
   Scenario: string
     When the schema is '{ "type": "string" }'
