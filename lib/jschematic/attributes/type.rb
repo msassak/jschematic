@@ -14,11 +14,11 @@ module Jschematic
         when /^object$/
           instance.instance_of?(Hash)
         when /^number$/
-          [Float, Integer].any? { |klass| instance.kind_of?(klass) }
+          assert_kind_of([Float, Integer], instance)
         when /^integer$/
           instance.kind_of?(Integer)
         when /^boolean$/
-          [TrueClass, FalseClass].any? { |klass| instance.kind_of?(klass) }
+          assert_kind_of([TrueClass, FalseClass], instance)
         else
           instance.instance_of?(constantize(type))
         end
@@ -28,6 +28,10 @@ module Jschematic
 
       def constantize(string)
         Kernel.const_get(string.capitalize)
+      end
+
+      def assert_kind_of(klassen, instance)
+        klassen.any?{ |klass| instance.kind_of?(klass) }
       end
     end
   end
