@@ -19,21 +19,6 @@ module Jschematic
 
     def type_valid?(type, json)
       Attributes::Type.new(type, json).valid?
-
-      return true unless type # always pass if type doesn't exist
-
-      type.capitalize!
-      klass = case
-              when type == "Object"
-                Hash
-              when type == "Number"
-                Float # or Fixnum or Bignum
-              when type == "Integer"
-                Fixnum # or Bignum 
-              else
-                constantize(type)
-              end
-      json.instance_of?(klass)
     end
 
     def minimum_valid?(min, exclusive, num)
@@ -65,12 +50,6 @@ module Jschematic
         type_valid?(schema["type"], json[property]) &&
           maximum_valid?(*schema.values_at("maximum", "exclusiveMaximum"), json[property])
       end
-    end
-
-    private
-
-    def constantize(string)
-      Kernel.const_get(string)
     end
   end
 end
