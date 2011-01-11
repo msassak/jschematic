@@ -47,8 +47,12 @@ module Jschematic
       return true unless schema
 
       schema.all? do |property, schema|
-        type_valid?(schema["type"], json[property]) &&
+        if json[property]
+          type_valid?(schema["type"], json[property]) &&
+            maximum_valid?(*schema.values_at("maximum", "exclusiveMaximum"), json[property])
+        else
           maximum_valid?(*schema.values_at("maximum", "exclusiveMaximum"), json[property])
+        end
       end
     end
   end
