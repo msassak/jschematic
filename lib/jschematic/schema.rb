@@ -18,7 +18,7 @@ module Jschematic
     end
 
     def type_valid?(type, json)
-      Attributes::Type.new(type, json).valid?
+      Attributes::Type.new(type).accepts?(json)
     end
 
     def minimum_valid?(min, exclusive, num)
