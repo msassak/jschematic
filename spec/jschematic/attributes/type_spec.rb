@@ -52,6 +52,11 @@ module Jschematic
         subject { Type.new("null") }
         it { should accept(nil) }
       end
+
+      context "union" do
+        subject { Type.new(["string", "integer"]) }
+        it { should_not accept(nil) }
+      end
     end
   end
 end
