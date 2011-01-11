@@ -5,11 +5,9 @@ Feature: Core Schema: type
     Then '"hello, world"' is valid JSON
 
   Scenario: number
-    TODO: test an integer is valid as well:
-    "And '2112' is valid JSON"
-    --- 
     When the schema is '{ "type": "number" }'
     Then '3.14159' is valid JSON
+    And '2112' is valid JSON
 
   Scenario: integer
     TODO: test that floats are not allowed:

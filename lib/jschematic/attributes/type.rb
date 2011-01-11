@@ -11,17 +11,16 @@ module Jschematic
         return true unless type
 
         type.capitalize!
-        klass = case
-                when type == "Object"
-                  Hash
-                when type == "Number"
-                  Float # or Fixnum or Bignum
-                when type == "Integer"
-                  Fixnum # or Bignum 
-                else
-                  constantize(type)
-                end
-        instance.instance_of?(klass)
+        case
+        when type == "Object"
+          instance.instance_of?(Hash)
+        when type == "Number"
+          [Float, Integer].any? { |klass| instance.kind_of?(klass) }
+        when type == "Integer"
+          instance.kind_of?(Integer)
+        else
+          instance.instance_of?(constantize(type))
+        end
       end
 
       private
