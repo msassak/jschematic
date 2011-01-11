@@ -36,5 +36,8 @@ Feature: Core Schema: type
       """
 
   Scenario: null
+    When the schema is '{ "type": "null" }'
+    Then 'null' is valid JSON
+
   Scenario: any
   Scenario: union

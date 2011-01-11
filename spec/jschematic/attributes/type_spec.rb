@@ -15,6 +15,28 @@ module Jschematic
         it { should_not accept("true") }
         it { should_not accept([1,2,3]) }
       end
+
+      context "object" do
+        subject { Type.new("object") }
+        it { should_not accept(nil) }
+        it { should_not accept([1,2,3]) }
+        it { should_not accept("string") }
+      end
+
+      context "array" do
+        subject { Type.new("array") }
+        it { should_not accept(nil) }
+        it { should_not accept({:foo => "bar"}) }
+        it { should_not accept(1234) }
+      end
+
+      context "null" do
+        subject { Type.new("null") }
+        it { should accept(nil) }
+        it { should_not accept(true) }
+        it { should_not accept("string") }
+        it { should_not accept([1,2,3]) }
+      end
     end
   end
 end

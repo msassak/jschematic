@@ -19,6 +19,8 @@ module Jschematic
           instance.kind_of?(Integer)
         when /^boolean$/
           assert_kind_of([TrueClass, FalseClass], instance)
+        when /^null$/
+          assert_kind_of([NilClass], instance)
         else
           instance.instance_of?(constantize(type))
         end
