@@ -1,5 +1,5 @@
 @sanity-check
-Feature: Core Schema: minimum
+Feature: Core Schema: minimum, maximum & related
 
   Scenario: minimum
     When the schema is:
@@ -11,6 +11,8 @@ Feature: Core Schema: minimum
     But '24' is not valid JSON
 
   Scenario: instance value is not a number
+    TODO: this should be a spec
+    ---
     When the schema is:
       """
       { "minimum": 24 }
