@@ -25,6 +25,12 @@ Then /^'(.+)' is not valid JSON$/ do |json|
   assert_invalid(@json, @schema)
 end
 
+Then "all of these are valid JSON:" do |instances|
+  instances.raw.each do |row|
+    assert_valid(row[0], @schema)
+  end
+end
+
 module JschematicWorld
   def parse(json)
     Yajl::Parser.parse(json)

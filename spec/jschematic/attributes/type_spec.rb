@@ -37,6 +37,11 @@ module Jschematic
         it { should_not accept("string") }
         it { should_not accept([1,2,3]) }
       end
+
+      context "any" do
+        subject { Type.new("null") }
+        it { should accept(nil) }
+      end
     end
   end
 end

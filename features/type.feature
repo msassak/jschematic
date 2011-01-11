@@ -40,4 +40,14 @@ Feature: Core Schema: type
     Then 'null' is valid JSON
 
   Scenario: any
+    When the schema is '{ "type": "any" }'
+    Then all of these are valid JSON:
+      | "Felizberto"   |
+      | 3.1415         |
+      | 2112           |
+      | true           |
+      | { "age": 24 }  |
+      | ["foo", "bar"] |
+      | null           |
+
   Scenario: union
