@@ -10,14 +10,14 @@ module Jschematic
       def accepts?(instance)
         return true unless type
 
-        case
-        when type == "object"
+        case type
+        when /^object$/
           instance.instance_of?(Hash)
-        when type == "number"
+        when /^number$/
           [Float, Integer].any? { |klass| instance.kind_of?(klass) }
-        when type == "integer"
+        when /^integer$/
           instance.kind_of?(Integer)
-        when type == "boolean"
+        when /^boolean$/
           [TrueClass, FalseClass].any? { |klass| instance.kind_of?(klass) }
         else
           instance.instance_of?(constantize(type))
