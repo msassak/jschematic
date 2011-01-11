@@ -16,6 +16,8 @@ module Jschematic
     end
 
     def type_valid?(type, json)
+      Type.new(type, json).valid?
+
       return true unless type # always pass if type doesn't exist
 
       type.capitalize!
