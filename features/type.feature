@@ -1,4 +1,5 @@
-Feature: Schema Types
+Feature: Core Schema: type
+
   Scenario: string
     When the schema is '{ "type": "string" }'
     Then '"hello, world"' is valid JSON

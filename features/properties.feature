@@ -1,4 +1,4 @@
-Feature: Schema Properties
+Feature: Core Schema: properties
   Scenario: With type attribute
     When the schema is:
       """
