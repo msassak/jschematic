@@ -9,7 +9,7 @@ module Jschematic
     end
 
     def valid?
-      Schema.new(schema, json).valid?
+      Schema.new(schema).validate(json)
     end
   end
 end

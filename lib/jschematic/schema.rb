@@ -2,13 +2,13 @@ require 'jschematic/attributes'
 
 module Jschematic
   class Schema
-    attr_reader :schema, :instance
+    attr_reader :schema
 
-    def initialize(schema, instance)
-      @schema, @instance = schema, instance
+    def initialize(schema)
+      @schema = schema
     end
 
-    def valid?
+    def validate(instance)
       [
         type_valid?(schema["type"], instance),
         minimum_valid?(*schema.values_at("minimum", "exclusiveMinimum"), instance),
