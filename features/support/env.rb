@@ -5,3 +5,9 @@ require 'yajl'
 require 'jsonschema'
 
 require 'jschematic'
+
+if ENV['SANITY_CHECK']
+  Before do
+    @sanity_check = true
+  end
+end
