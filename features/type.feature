@@ -1,4 +1,3 @@
-@sanity_check
 Feature: Core Schema: type
 
   Scenario: string
@@ -59,4 +58,5 @@ Feature: Core Schema: type
     When the schema is '{ "type": ["string", "null"] }'
     Then 'null' is valid JSON
 
+  @ignore
   Scenario: union with schema element 

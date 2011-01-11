@@ -8,6 +8,6 @@ require 'jschematic'
 
 if ENV['SANITY_CHECK']
   Before do
-    @sanity_check = true
+    enable_sanity_check
   end
 end

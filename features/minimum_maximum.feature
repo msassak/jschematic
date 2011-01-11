@@ -1,4 +1,4 @@
-@sanity-check
+@sanity_check
 Feature: Core Schema: minimum, maximum & related
 
   Scenario: minimum
