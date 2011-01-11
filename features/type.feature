@@ -1,3 +1,4 @@
+@sanity_check
 Feature: Core Schema: type
   TODO: (the primitives listed above do not allow nulls on their own)
 
@@ -14,6 +15,11 @@ Feature: Core Schema: type
     When the schema is '{ "type": "integer" }'
     Then '2112' is valid JSON
     But '3.14159' is not valid JSON
+
+  Scenario: boolean
+    When the schema is '{ "type": "boolean" }'
+    Then 'true' is valid JSON
+    And 'false' is valid JSON
 
   Scenario: object
     When the schema is '{ "type": "object" }'

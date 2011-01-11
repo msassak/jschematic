@@ -17,6 +17,8 @@ module Jschematic
           [Float, Integer].any? { |klass| instance.kind_of?(klass) }
         when type == "integer"
           instance.kind_of?(Integer)
+        when type == "boolean"
+          [TrueClass, FalseClass].any? { |klass| instance.kind_of?(klass) }
         else
           instance.instance_of?(constantize(type))
         end
