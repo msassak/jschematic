@@ -1,5 +1,6 @@
 Feature: Core Schema: properties
-  Scenario: With type attribute
+
+  Scenario: instance property values must conform to schema property definitions
     When the schema is:
       """
       {
@@ -8,8 +9,9 @@ Feature: Core Schema: properties
           }
       }
       """
-      Then '{ "name": "Felizberto" }' is valid JSON
-      But '{ "name": 12345" }' is not valid JSON
+    Then '{ "name": "Felizberto" }' is valid JSON
+    And '{ "color": "red" }' is valid JSON
+    But '{ "name": 12345" }' is not valid JSON
 
   Scenario: With maximum attribute
     When the schema is:
@@ -20,8 +22,8 @@ Feature: Core Schema: properties
           }
       }
       """
-      Then '{ "age": 25 }' is valid JSON
-      But '{ "age": 26 }' is not valid JSON
+    Then '{ "age": 25 }' is valid JSON
+    But '{ "age": 26 }' is not valid JSON
 
   @ignore
   Scenario: possible useful syntax
