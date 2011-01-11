@@ -40,7 +40,7 @@ Feature: Core Schema: type
 
   Scenario: any
     When the schema is '{ "type": "any" }'
-    Then all of these are valid JSON:
+    Then these are valid JSON:
       | "Felizberto"   |
       | 3.1415         |
       | 2112           |
@@ -50,3 +50,13 @@ Feature: Core Schema: type
       | null           |
 
   Scenario: union
+    When the schema is '{ "type": ["string", "number"] }'
+    Then '"Felizberto"' is valid JSON
+    And '2112' is valid JSON
+    But 'true' is not valid JSON
+
+  Scenario: union allowing null values
+    When the schema is '{ "type": ["string", "null"] }'
+    Then 'null' is valid JSON
+
+  Scenario: union with schema element 

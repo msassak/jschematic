@@ -23,6 +23,8 @@ module Jschematic
           assert_kind_of([NilClass], instance)
         when /^any$/
           true
+        when Array # union
+          type.any?{ |attribute| Type.new(attribute).accepts?(instance) }
         else
           instance.instance_of?(constantize(type))
         end
