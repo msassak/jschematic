@@ -4,18 +4,18 @@ module Jschematic
       attr_reader :type
 
       def initialize(type)
-        @type = type.capitalize
+        @type = type
       end
 
       def accepts?(instance)
         return true unless type
 
         case
-        when type == "Object"
+        when type == "object"
           instance.instance_of?(Hash)
-        when type == "Number"
+        when type == "number"
           [Float, Integer].any? { |klass| instance.kind_of?(klass) }
-        when type == "Integer"
+        when type == "integer"
           instance.kind_of?(Integer)
         else
           instance.instance_of?(constantize(type))
@@ -25,7 +25,7 @@ module Jschematic
       private
 
       def constantize(string)
-        Kernel.const_get(string)
+        Kernel.const_get(string.capitalize)
       end
     end
   end
