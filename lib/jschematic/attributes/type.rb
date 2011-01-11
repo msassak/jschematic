@@ -4,13 +4,12 @@ module Jschematic
       attr_reader :type
 
       def initialize(type)
-        @type = type
+        @type = type.capitalize
       end
 
       def accepts?(instance)
         return true unless type
 
-        type.capitalize!
         case
         when type == "Object"
           instance.instance_of?(Hash)
