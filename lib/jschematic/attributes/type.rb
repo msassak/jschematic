@@ -1,13 +1,13 @@
 module Jschematic
   module Attributes
     class Type
-      attr_reader :type, :instance
+      attr_reader :type
 
-      def initialize(type, instance)
-        @type, @instance = type, instance
+      def initialize(type)
+        @type = type
       end
 
-      def valid?
+      def accepts?(instance)
         return true unless type
 
         type.capitalize!
