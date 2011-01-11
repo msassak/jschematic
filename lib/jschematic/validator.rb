@@ -15,6 +15,7 @@ module Jschematic
 
     def type_valid?(type, json)
       return true unless type # always pass if type doesn't exist
+
       type.capitalize!
       klass = case
               when type == "Object"
