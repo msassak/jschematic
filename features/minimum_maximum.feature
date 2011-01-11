@@ -11,7 +11,7 @@ Feature: Core Schema: minimum, maximum & related
     But '24' is not valid JSON
 
   Scenario: instance value is not a number
-    TODO: this should be a spec
+    TODO: this should be a spec, and tested for maximum as well
     ---
     When the schema is:
       """
@@ -20,6 +20,8 @@ Feature: Core Schema: minimum, maximum & related
     Then '"portokalli"' is valid JSON
 
   Scenario: exclusiveMinimum
+    TODO: test dependency on minimum in spec
+    ---
     When the schema is:
       """
       { "minimum": 25, "exclusiveMinimum": true }
@@ -37,6 +39,8 @@ Feature: Core Schema: minimum, maximum & related
     But '26' is not valid JSON
 
   Scenario: exclusiveMaximum
+    TODO: test dependency on maximum in spec
+    ---
     When the schema is:
       """
       { "maximum": 25, "exclusiveMaximum": true }
