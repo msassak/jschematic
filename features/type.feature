@@ -10,11 +10,9 @@ Feature: Core Schema: type
     And '2112' is valid JSON
 
   Scenario: integer
-    TODO: test that floats are not allowed:
-    "And '3.14159' is not valid JSON"
-    ---
     When the schema is '{ "type": "integer" }'
     Then '2112' is valid JSON
+    But '3.14159' is not valid JSON
 
   Scenario: object
     When the schema is '{ "type": "object" }'
