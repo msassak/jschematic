@@ -26,3 +26,20 @@ Feature: Core Schema: minimum, maximum & related
       """
     Then '26' is valid JSON
     But '25' is not valid JSON
+
+  Scenario: maximum
+    When the schema is:
+      """
+      { "maximum": 25 }
+      """
+    Then '25' is valid JSON
+    And '24' is valid JSON
+    But '26' is not valid JSON
+
+  Scenario: exclusiveMaximum
+    When the schema is:
+      """
+      { "maximum": 25, "exclusiveMaximum": true }
+      """
+      Then '24.9' is valid JSON
+      But '25' is not valid JSON

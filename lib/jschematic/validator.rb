@@ -10,6 +10,7 @@ module Jschematic
       [
         type_valid?(schema["type"], json),
         minimum_valid?(*schema.values_at("minimum", "exclusiveMinimum"), json),
+        maximum_valid?(*schema.values_at("maximum", "exclusiveMaximum"), json),
         properties_valid?(schema["properties"], json)
       ].all? { |res| res == true }
     end
@@ -42,9 +43,15 @@ module Jschematic
       end
     end
 
-    def maximum_valid?(max, num)
+    def maximum_valid?(max, exclusive, num)
       return true unless max
-      num <= max
+      return true unless (num.kind_of?(Integer) || num.kind_of?(Float))
+
+      if exclusive
+        num < max
+      else
+        num <= max
+      end
     end
 
     def properties_valid?(schema, json)
@@ -52,7 +59,7 @@ module Jschematic
 
       schema.all? do |property, schema|
         type_valid?(schema["type"], json[property]) &&
-          maximum_valid?(schema["maximum"], json[property])
+          maximum_valid?(*schema.values_at("maximum", "exclusiveMaximum"), json[property])
       end
     end
 
