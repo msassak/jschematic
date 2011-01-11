@@ -8,8 +8,8 @@ Feature: Schema Properties
           }
       }
       """
-      Then '{ "name": "Felizberto" }' is acceptable JSON
-      But '{ "name": 12345" }' is not acceptable JSON
+      Then '{ "name": "Felizberto" }' is valid JSON
+      But '{ "name": 12345" }' is not valid JSON
 
   Scenario: With maximum attribute
     When the schema is:
@@ -20,8 +20,8 @@ Feature: Schema Properties
           }
       }
       """
-      Then '{ "age": 25 }' is acceptable JSON
-      But '{ "age": 26 }' is not acceptable JSON
+      Then '{ "age": 25 }' is valid JSON
+      But '{ "age": 26 }' is not valid JSON
 
   @ignore
   Scenario: possible useful syntax

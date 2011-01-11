@@ -6,17 +6,17 @@ When "the schema is:" do |schema|
   @schema = parse(schema)
 end
 
-Then /^'(.+)' is acceptable JSON$/ do |json|
+Then /^'(.+)' is valid JSON$/ do |json|
   @json = parse(json)
   assert_valid(@json, @schema)
 end
 
-Then "this is acceptable JSON:" do |json|
+Then "this is valid JSON:" do |json|
   @json = parse(json)
   assert_valid(@json, @schema)
 end
 
-Then /^'(.+)' is not acceptable JSON$/ do |json|
+Then /^'(.+)' is not valid JSON$/ do |json|
   @json = parse(json)
   assert_invalid(@json, @schema)
 end
