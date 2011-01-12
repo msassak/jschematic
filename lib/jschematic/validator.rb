@@ -5,11 +5,11 @@ module Jschematic
     attr_reader :schema, :json
 
     def initialize(schema, json)
-      @schema, @json = schema, json
+      @schema, @json = Schema.new(schema), json
     end
 
     def valid?
-      Schema.new(schema).validate(json)
+      schema.validate(json)
     end
   end
 end
