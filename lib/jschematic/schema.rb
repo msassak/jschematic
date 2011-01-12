@@ -27,14 +27,7 @@ module Jschematic
     end
 
     def maximum_valid?(max, exclusive, num)
-      return true unless max
-      return true unless (num.kind_of?(Integer) || num.kind_of?(Float))
-
-      if exclusive
-        num < max
-      else
-        num <= max
-      end
+      Attributes::Maximum.new(max, exclusive).accepts?(num)
     end
 
     def properties_valid?(schema, json)
