@@ -13,7 +13,8 @@ module Jschematic
         type_valid?(schema["type"], instance),
         minimum_valid?(*schema.values_at("minimum", "exclusiveMinimum"), instance),
         maximum_valid?(*schema.values_at("maximum", "exclusiveMaximum"), instance),
-        properties_valid?(schema["properties"], instance)
+        properties_valid?(schema["properties"], instance),
+        items_valid?(schema["items"], instance)
       ].all? { |res| res == true }
     end
 
@@ -54,6 +55,13 @@ module Jschematic
           maximum_valid?(*schema.values_at("maximum", "exclusiveMaximum"), json[property])
         end
       end
+    end
+
+    def items_valid?(schema, json)
+      return true unless schema
+      return true unless json.kind_of?(Array)
+
+      json.all?{ |item| Schema.new(schema).validate(item) }
     end
   end
 end
