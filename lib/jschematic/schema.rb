@@ -23,14 +23,15 @@ module Jschematic
     end
 
     def minimum_valid?(min, exclusive, num)
-      return true unless min
-      return true unless (num.kind_of?(Integer) || num.kind_of?(Float))
+      #return true unless min
+      #return true unless (num.kind_of?(Integer) || num.kind_of?(Float))
 
-      if exclusive
-        num > min
-      else
-        num >= min
-      end
+      #if exclusive
+        #num > min
+      #else
+        #num >= min
+      #end
+      Attributes::Minimum.new(min, exclusive).accepts?(num)
     end
 
     def maximum_valid?(max, exclusive, num)
