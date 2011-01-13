@@ -5,7 +5,7 @@ module Jschematic
 
       def initialize(minimum, exclusive=true, &callback)
         @minimum, @exclusive = minimum, exclusive
-        @exclusive = callback.call if block_given?
+        @exclusive = callback.call("exclusiveMinimum") if block_given?
       end
 
       def accepts?(number)

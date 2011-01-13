@@ -9,7 +9,7 @@ module Jschematic
     end
 
     def valid?
-      schema.validate(json)
+      schema.accepts?(json)
     end
   end
 end
