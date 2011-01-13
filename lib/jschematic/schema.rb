@@ -47,7 +47,12 @@ module Jschematic
       return true unless schema
       return true unless json.kind_of?(Array)
 
-      json.all?{ |item| Schema.new(schema).validate(item) }
+      case schema
+      when Hash
+        json.all?{ |item| Schema.new(schema).validate(item) }
+      when Array
+        schema.zip(json).all?{ |schema, item| Schema.new(schema).validate(item) }
+      end
     end
   end
 end
