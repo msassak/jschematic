@@ -3,8 +3,9 @@ module Jschematic
     class Minimum 
       attr_reader :minimum, :exclusive
 
-      def initialize(minimum, exclusive=true)
+      def initialize(minimum, exclusive=true, &callback)
         @minimum, @exclusive = minimum, exclusive
+        @exclusive = callback.call if block_given?
       end
 
       def accepts?(number)

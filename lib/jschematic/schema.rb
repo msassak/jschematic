@@ -5,7 +5,61 @@ module Jschematic
     attr_reader :schema
 
     def initialize(schema)
+      #def recur_hash(hash, acc)
+      #  hash.each_pair do |key, value|
+      #    if Hash===value
+      #      acc << "#{key} is a hash!"
+      #      recur_hash(hash[key], acc)
+      #    else
+      #      acc << "#{key} has value: #{value}"
+      #    end
+      #  end
+      #  acc.flatten
+      #end
+
+      #h = {
+      #  "foo" => "bar",
+      #  "baz" => [1,2,3],
+      #  :elements => {
+      #    "another_thing" => "fooble",
+      #    "type" => "integer",
+      #    "values" => [1,2,3,4,5],
+      #    "properties" => {
+      #      "type" => :array,
+      #      "name" => "maglarble"
+      #    }
+      #  }
+      #}
+
+      #p recur_hash(h, [])
+      
       @schema = schema
+      @parent = nil
+      @children = []
+
+      schema.each_pair do |attribute, value|
+        if value.kind_of?(Hash)
+          # Must be a schema
+          @children << Schema.new(schema[attribute])
+        else
+          if attribute == "items"
+            # handle this
+          elsif attribute == "properties"
+            # and this
+          else
+            begin
+              attr_class = Attributes.const_get(attribute.capitalize)
+              @children << attr_class.new(attribute){ |dep| schema[dep] }
+            rescue NameError => e
+              # no Atttribute class found
+            end
+          end
+        end
+      end
+    end
+
+    def accepts?(instance)
+      validate(instance)
     end
 
     def validate(instance)
