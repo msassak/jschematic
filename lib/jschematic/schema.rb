@@ -10,24 +10,11 @@ module Jschematic
       @children = []
 
       @schema.each_pair do |attribute, value|
-        if attribute == "properties"
-          @children << Attributes::Properties.new(value)
-        elsif attribute == "items"
-          @children << Attributes::Items.new(value)
-        elsif value.kind_of?(Hash)
-          # begin
-          #   get attribute
-          # rescue NameError
-          #   Must be a schema
-          # end
-          @children << Schema.new(schema[attribute], self)
-        else
-          begin
-            attr_class = Attributes.const_get(attribute.capitalize)
-            @children << attr_class.new(value){ |dep| schema[dep] }
-          rescue NameError => e
-            # no Atttribute class found
-          end
+        begin
+          attr_class = Attributes.const_get(attribute.capitalize)
+          @children << attr_class.new(value){ |dep| schema[dep] }
+        rescue NameError => e
+          # no attribute class found -- do something about that
         end
       end
     end
