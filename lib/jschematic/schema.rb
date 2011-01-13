@@ -5,34 +5,6 @@ module Jschematic
     attr_reader :schema
 
     def initialize(schema, parent=nil)
-      #def recur_hash(hash, acc)
-      #  hash.each_pair do |key, value|
-      #    if Hash===value
-      #      acc << "#{key} is a hash!"
-      #      recur_hash(hash[key], acc)
-      #    else
-      #      acc << "#{key} has value: #{value}"
-      #    end
-      #  end
-      #  acc.flatten
-      #end
-
-      #h = {
-      #  "foo" => "bar",
-      #  "baz" => [1,2,3],
-      #  :elements => {
-      #    "another_thing" => "fooble",
-      #    "type" => "integer",
-      #    "values" => [1,2,3,4,5],
-      #    "properties" => {
-      #      "type" => :array,
-      #      "name" => "maglarble"
-      #    }
-      #  }
-      #}
-
-      #p recur_hash(h, [])
-      
       @schema = schema || {}
       @parent = parent
       @children = []
