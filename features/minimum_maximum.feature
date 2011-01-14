@@ -25,8 +25,8 @@ Feature: Core Schema: minimum, maximum & related
   Scenario: maximum
     When the schema is '{ "maximum": 25 }'
     Then '25' is valid JSON
-    And '24' is valid JSON
-    But '26' is not valid JSON
+    And '24.9' is valid JSON
+    But '25.1' is not valid JSON
 
   Scenario: exclusiveMaximum
     TODO: test dependency on maximum in spec
