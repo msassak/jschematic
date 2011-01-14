@@ -25,6 +25,38 @@ Feature: Core Schema: properties
     Then '{ "age": 25 }' is valid JSON
     But '{ "age": 26 }' is not valid JSON
 
+  Scenario: deeply nested
+    When the schema is:
+      """
+      {
+          "properties": {
+              "attributes": { 
+                  "properties": {
+                      "attribute": { 
+                          "type": "string" 
+                      }
+                  }
+              }
+          }
+      }
+      """
+    Then this is valid JSON:
+      """
+      {
+          "attributes": {
+              "attribute": "value"
+          }
+      }
+      """
+    But this is not valid JSON:
+      """
+      {
+          "attributes": {
+              "attribute": 2112
+          }
+      }
+      """
+
   @ignore
   Scenario: possible useful syntax
     Given the schema is:

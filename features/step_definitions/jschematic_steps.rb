@@ -15,12 +15,17 @@ Then /^'(.+)' is valid JSON$/ do |json|
   assert_valid(@json, @schema)
 end
 
+Then /^'(.+)' is not valid JSON$/ do |json|
+  @json = parse(json)
+  assert_invalid(@json, @schema)
+end
+
 Then "this is valid JSON:" do |json|
   @json = parse(json)
   assert_valid(@json, @schema)
 end
 
-Then /^'(.+)' is not valid JSON$/ do |json|
+Then "this is not valid JSON:" do |json|
   @json = parse(json)
   assert_invalid(@json, @schema)
 end
