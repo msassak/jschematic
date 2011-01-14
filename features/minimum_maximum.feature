@@ -13,8 +13,6 @@ Feature: Core Schema: minimum, maximum & related
     Then '"portokalli"' is valid JSON
 
   Scenario: exclusiveMinimum
-    TODO: test dependency on minimum in spec
-    ---
     When the schema is:
       """
       { "minimum": 25, "exclusiveMinimum": true }
@@ -29,8 +27,6 @@ Feature: Core Schema: minimum, maximum & related
     But '25.1' is not valid JSON
 
   Scenario: exclusiveMaximum
-    TODO: test dependency on maximum in spec
-    ---
     When the schema is:
       """
       { "maximum": 25, "exclusiveMaximum": true }

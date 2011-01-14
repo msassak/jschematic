@@ -1,15 +1,15 @@
 module Jschematic
   module Attributes
-    class ExclusiveMaximum
+    class ExclusiveMinimum
       def initialize(enabled, &block)
         @enabled = enabled
-        @maximum = block.call("maximum") if block_given?
-        raise "'exclusiveMaximum' depends on 'maximum'" unless @maximum
+        @minimum = block.call("minimum") if block_given?
+        raise "'exclusiveMinimum' depends on 'minimum'" unless @minimum
       end
 
       def accepts?(actual)
         if @enabled
-          actual < @maximum
+          actual > @minimum
         end
       end
     end
