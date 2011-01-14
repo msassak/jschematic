@@ -40,3 +40,4 @@ Feature: Core Schema: properties
     Then the JSON is valid
     When the value of name is "12345"
     Then the JSON is not valid
+
