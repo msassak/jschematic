@@ -6,5 +6,8 @@ require 'jschematic/attributes/items'
 
 module Jschematic
   module Attributes
+    def self.[](name)
+      const_get(name.capitalize)
+    end
   end
 end

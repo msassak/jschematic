@@ -4,17 +4,17 @@ module Jschematic
   class Schema
     attr_reader :schema
 
-    def initialize(schema, parent=nil)
+    def initialize(schema)
       @schema = schema || {}
-      @parent = parent
       @children = []
 
       @schema.each_pair do |attribute, value|
         begin
-          attr_class = Attributes.const_get(attribute.capitalize)
-          @children << attr_class.new(value){ |dep| schema[dep] }
+          @children << Attributes[attribute].new(value){ |dep| schema[dep] }
         rescue NameError => e
-          # no attribute class found -- do something about that
+          # Not finding an attribute is not necessarily a failure, so 
+          # we should not fail, but we may need to mark it someplace...
+          # Unsure what to do in this case. 
         end
       end
     end
