@@ -40,14 +40,12 @@ module JschematicWorld
 
   def assert_valid(json, schema)
     assert_sanity(json, schema, true) if @sanity_check
-    validator = Jschematic::Validator.new(schema, json)
-    validator.should be_valid
+    Jschematic.validate(json, schema).should be_true
   end
 
   def assert_invalid(json, schema)
     assert_sanity(json, schema, false) if @sanity_check
-    validator = Jschematic::Validator.new(schema, json)
-    validator.should_not be_valid
+    Jschematic.validate(json, schema).should be_false
   end
 
   def assert_sanity(json, schema, expect_valid=true)
