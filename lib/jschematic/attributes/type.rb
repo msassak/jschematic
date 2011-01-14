@@ -24,7 +24,13 @@ module Jschematic
         when /^any$/
           true
         when Array # union
-          type.any?{ |attribute| Type.new(attribute).accepts?(instance) }
+          type.any? do |union_type|
+            if String===union_type
+              Type.new(union_type).accepts?(instance)
+            elsif Hash===union_type
+              Schema.new(union_type).accepts?(instance)
+            end
+          end
         else
           instance.instance_of?(constantize(type))
         end

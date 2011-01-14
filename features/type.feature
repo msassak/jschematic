@@ -58,5 +58,16 @@ Feature: Core Schema: type
     When the schema is '{ "type": ["string", "null"] }'
     Then 'null' is valid JSON
 
-  @ignore
   Scenario: union with schema element 
+    When the schema is:
+      """
+      {
+          "type": [
+              "string", 
+              { "type": "integer", "maximum": 2112 }
+          ]
+      }
+      """
+    Then '"Felizberto"' is valid JSON
+    And '2112' is valid JSON
+    But '2113' is not valid JSON
