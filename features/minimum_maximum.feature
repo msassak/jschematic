@@ -6,12 +6,6 @@ Feature: Core Schema: minimum, maximum & related
     And '25' is valid JSON
     But '24' is not valid JSON
 
-  Scenario: instance value is not a number
-    TODO: this should be a spec, and tested for maximum as well
-    ---
-    When the schema is '{ "minimum": 24 }'
-    Then '"portokalli"' is valid JSON
-
   Scenario: exclusiveMinimum
     When the schema is:
       """

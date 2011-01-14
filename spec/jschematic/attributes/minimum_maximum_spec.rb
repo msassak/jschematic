@@ -2,6 +2,18 @@ require 'spec_helper'
 
 module Jschematic
   module Attributes
+    describe Minimum do
+      subject { Minimum.new(2112) }
+
+      it { should accept("portokalli") }
+    end
+
+    describe Maximum do
+      subject { Maximum.new(2112) }
+      
+      it { should accept("portokalli") }
+    end
+
     describe ExclusiveMinimum do
       subject { ExclusiveMinimum }
 
