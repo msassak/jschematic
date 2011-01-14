@@ -31,7 +31,9 @@ module Jschematic
               Schema.new(union_type).accepts?(instance)
             end
           end
-        else
+        else 
+          # TODO: probably worth just putting in explicit mapping for all 
+          # JSON schema types--there are only a few left
           instance.instance_of?(constantize(type))
         end
       end
