@@ -13,9 +13,10 @@ module Jschematic
         begin
           @children << Attributes[attribute].new(value){ |dep| schema[dep] }
         rescue NameError => e
-          # Not finding an attribute is not necessarily a failure, so 
-          # we should not fail, but we may need to mark it someplace...
-          # Unsure what to do in this case. 
+          # Not finding an attribute is not necessarily an error, but this is
+          # obviously not the right way to handle it. Need to find a better way to
+          # report information.
+          puts "NameError #{e} encountered... continuing"
         end
       end
     end
