@@ -1,3 +1,4 @@
+require 'jschematic/errors'
 require 'jschematic/attributes'
 
 module Jschematic
