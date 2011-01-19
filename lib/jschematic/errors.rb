@@ -19,6 +19,10 @@ module Jschematic
       @errors
     end
 
+    def empty?
+      @errors.empty?
+    end
+
     def reset!
       @errors = []
     end

@@ -34,9 +34,9 @@ module Jschematic
     describe "#reset!" do
       it "clears the collected errors" do
         errors.add(:ident, "desc")
-        errors.all.should_not be_empty
+        errors.should_not be_empty
         errors.reset!
-        errors.all.should be_empty
+        errors.should be_empty
       end
     end
   end
