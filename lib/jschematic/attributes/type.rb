@@ -1,6 +1,8 @@
+require 'jschematic/attributes/attribute'
+
 module Jschematic
   module Attributes
-    class Type
+    class Type < Attribute
       attr_reader :type
 
       def initialize(type)
@@ -12,11 +14,11 @@ module Jschematic
 
         case type
         when /^object$/
-          instance.instance_of?(Hash)
+          assert_kind_of([Hash], instance)
         when /^number$/
           assert_kind_of([Float, Integer], instance)
         when /^integer$/
-          instance.kind_of?(Integer)
+          assert_kind_of([Integer], instance)
         when /^boolean$/
           assert_kind_of([TrueClass, FalseClass], instance)
         when /^null$/
@@ -24,28 +26,37 @@ module Jschematic
         when /^any$/
           true
         when Array # union
+          # TODO: this is gross. A specific Union type is likely called for.
           type.any? do |union_type|
-            if String===union_type
-              Type.new(union_type).accepts?(instance)
-            elsif Hash===union_type
-              Schema.new(union_type).accepts?(instance)
+            begin
+              if String===union_type
+                Type.new(union_type).accepts?(instance)
+              elsif Hash===union_type
+                Schema.new(union_type).accepts?(instance)
+              end
+            rescue ValidationError
+              false
             end
           end
         else 
           # TODO: probably worth just putting in explicit mapping for all 
           # JSON schema types--there are only a few left
-          instance.instance_of?(constantize(type))
+          assert_kind_of([constantize(type)], instance)
         end
       end
 
+      def to_s
+        "Type attribute '#{type}'"
+      end
+
       private
+      
+      def assert_kind_of(klassen, instance)
+        klassen.any?{ |klass| instance.kind_of?(klass) } || fail_validation!(klassen, instance)
+      end
 
       def constantize(string)
         Kernel.const_get(string.capitalize)
-      end
-
-      def assert_kind_of(klassen, instance)
-        klassen.any?{ |klass| instance.kind_of?(klass) }
       end
     end
   end

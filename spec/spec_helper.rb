@@ -6,7 +6,11 @@ require 'jschematic'
 
 RSpec::Matchers.define :accept do |instance_value|
   match do |validator|
-    validator.accepts?(instance_value)
+    begin
+      validator.accepts?(instance_value)
+    rescue Jschematic::ValidationError
+      false
+    end
   end
 end
 
