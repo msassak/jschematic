@@ -13,7 +13,7 @@ Feature: Core Schema: properties
     And '{ "color": "red" }' is valid JSON
     But '{ "name": 12345" }' is not valid JSON
 
-  Scenario: With maximum attribute
+  Scenario: With extra attribute
     When the schema is:
       """
       {
@@ -22,8 +22,8 @@ Feature: Core Schema: properties
           }
       }
       """
-    Then '{ "age": 25 }' is valid JSON
-    But '{ "age": 26 }' is not valid JSON
+    Then '{ "age": 25, "color": "red" }' is valid JSON
+    But '{ "age": 26, "color": "red" }' is not valid JSON
 
   Scenario: deeply nested
     When the schema is:
