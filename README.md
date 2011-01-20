@@ -5,7 +5,8 @@ Jschematic is a JSON Schema v3 Validator for Ruby.
 ## Usage
 
    require 'jschematic'
-   Jschematic.validate(json, schema) # => true or false
+   Jschematic.validate(json, schema)  # => true or false
+   Jschematic.validate!(json, schema) # => true or raise Jschematic::ValidationError
 
 `json` and `schema` above must be Ruby data structures, not real JSON.
 
@@ -14,7 +15,9 @@ fine yajl-ruby gem for testing).
 
 ## ToDo
 
-* Whole lots of stuff
+* Implement remaining attributes for base schema validation
+* Improve error reporting and handling
+* Allow collection of validation results
 
 ## Testing
 
