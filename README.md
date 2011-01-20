@@ -6,9 +6,9 @@ It is currently incomplete, alpha quality software. Many things do not work.
 
 ## Usage
 
-   require 'jschematic'
-   Jschematic.validate(json, schema)  # => true or false
-   Jschematic.validate!(json, schema) # => true or raise Jschematic::ValidationError
+    require 'jschematic'
+    Jschematic.validate(json, schema)  # => true or false
+    Jschematic.validate!(json, schema) # => true or raise Jschematic::ValidationError
 
 `json` and `schema` above must be Ruby data structures, not real JSON.
 
