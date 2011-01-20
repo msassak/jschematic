@@ -1,6 +1,8 @@
+require 'jschematic/attributes/attribute'
+
 module Jschematic
   module Attributes
-    class Maximum
+    class Maximum < Attribute
       attr_reader :maximum
 
       def initialize(maximum)
@@ -11,7 +13,7 @@ module Jschematic
         return true unless maximum
         return true unless (number.kind_of?(Integer) || number.kind_of?(Float))
 
-        number <= maximum
+        (number <= maximum) || fail_validation!("<= #{@maximum}", number)
       end
     end
   end

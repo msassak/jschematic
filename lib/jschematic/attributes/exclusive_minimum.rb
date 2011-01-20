@@ -1,6 +1,8 @@
+require 'jschematic/attributes/attribute'
+
 module Jschematic
   module Attributes
-    class ExclusiveMinimum
+    class ExclusiveMinimum < Attribute
       def initialize(enabled, &block)
         @enabled = enabled
         @minimum = block.call("minimum") if block_given?
@@ -9,7 +11,7 @@ module Jschematic
 
       def accepts?(actual)
         if @enabled
-          actual > @minimum
+          (actual > @minimum) || fail_validation!("> #{@minimum}", actual)
         end
       end
     end

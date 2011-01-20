@@ -1,6 +1,8 @@
+require 'jschematic/attributes/attribute'
+
 module Jschematic
   module Attributes
-    class Minimum 
+    class Minimum < Attribute
       attr_reader :minimum
 
       def initialize(minimum)
@@ -11,7 +13,7 @@ module Jschematic
         return true unless minimum
         return true unless (number.kind_of?(Integer) || number.kind_of?(Float))
 
-        number >= minimum
+        (number >= minimum) || fail_validation!(">= #{@minimum}", number)
       end
     end
   end
