@@ -32,7 +32,13 @@ end
 
 Then "these are valid JSON:" do |instances|
   instances.raw.each do |row|
-    assert_valid(row[0], @schema)
+    assert_valid(parse(row[0]), @schema)
+  end
+end
+
+Then "these are not valid JSON:" do |instances|
+  instances.raw.each do |row|
+    assert_invalid(parse(row[0]), @schema)
   end
 end
 
