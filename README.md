@@ -1,6 +1,8 @@
 # Jschematic
 
-Jschematic is a JSON Schema v3 Validator for Ruby. 
+Jschematic is a JSON Schema v3 Validator for Ruby.
+
+It is currently incomplete, alpha quality software. Many things do not work. 
 
 ## Usage
 
