@@ -49,7 +49,7 @@ module Jschematic
       end
 
       context "any" do
-        subject { Type.new("null") }
+        subject { Type.new("any") }
         it { should accept(nil) }
       end
 
