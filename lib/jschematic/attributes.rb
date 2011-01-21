@@ -2,11 +2,12 @@ require 'jschematic/attributes/type'
 require 'jschematic/attributes/properties'
 require 'jschematic/attributes/pattern_properties'
 require 'jschematic/attributes/additional_properties'
+require 'jschematic/attributes/items'
+require 'jschematic/attributes/required'
 require 'jschematic/attributes/minimum'
 require 'jschematic/attributes/maximum'
 require 'jschematic/attributes/exclusive_minimum'
 require 'jschematic/attributes/exclusive_maximum'
-require 'jschematic/attributes/items'
 
 module Jschematic
   module Attributes
