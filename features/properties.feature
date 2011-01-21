@@ -57,6 +57,9 @@ Feature: Core Schema: properties
       }
       """
 
+  Scenario: empty instance
+    TODO: find out what the behavior here should be
+
   @ignore
   Scenario: possible useful syntax
     Given the schema is:
