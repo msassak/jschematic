@@ -29,6 +29,7 @@ fine yajl-ruby gem for testing).
 ## Links
 
 * http://tools.ietf.org/html/draft-zyp-json-schema-03
+* https://github.com/kriszyp/json-schema
 
 ## Copyright
 
