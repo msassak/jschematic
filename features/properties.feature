@@ -1,4 +1,4 @@
-Feature: Core Schema: properties
+Feature: Core Schema: properties & additionalProperties
 
   Scenario: instance property values must conform to schema property definitions
     When the schema is:
@@ -57,22 +57,68 @@ Feature: Core Schema: properties
       }
       """
 
-  Scenario: empty instance
-    TODO: find out what the behavior here should be
-
-  @ignore
-  Scenario: possible useful syntax
-    Given the schema is:
+  Scenario: additionalProperties is false
+    When the schema is:
       """
       {
           "properties": {
-              "name": { "type": "string" }
+              "name": { "type": "string" },
+              "age": { "type": "integer" }
+          }, 
+
+          "additionalProperties": false
+      }
+      """
+    Then this is valid JSON:
+      """
+      {
+          "name": "Felizberto Albi",
+          "age": 24
+      }
+      """
+    But this is not valid JSON:
+      """
+      {
+          "name": "Felizberto Albi",
+          "age": 24,
+          "color": "red"
+      }
+      """
+
+  Scenario: additionalProperties defined by a schema 
+    When the schema is:
+      """
+      {
+          "properties": {
+              "name": { "type": "string" },
+              "age": { "type": "integer" }
+          },
+
+          "additionalProperties": {
+              "type": "string"
           }
       }
       """
-    And there is a JSON object with a "name" property
-    When the value of name is "Felizberto"
-    Then the JSON is valid
-    When the value of name is "12345"
-    Then the JSON is not valid
+    Then this is valid JSON:
+      """
+      {
+          "name": "Felizberto Albi",
+          "age": 24,
+          "color": "red"
+      }
+      """
+    But this is not valid JSON:
+      """
+      {
+          "name": "Felizberto Albi",
+          "age": 24,
+          "number": 2112
+      }
+      """
 
+  Scenario: when true
+    TODO: duh
+  Scenario: neither boolean nor schema
+    TODO: should fail loudly: move into spec
+  Scenario: empty instance
+    TODO: find out what the behavior here should be
