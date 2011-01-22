@@ -16,3 +16,11 @@ Feature: Core schema: enum
       | 2                      |
       | [true, false]          |
       | { "name": "Mariposa" } |
+
+  Scenario: empty enum
+    When the schema is '{ "enum": [] }'
+    Then these are not valid JSON:
+      | ""   |
+      | []   |
+      | {}   |
+      | null |
