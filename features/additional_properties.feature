@@ -58,5 +58,6 @@ Feature: Core schema: additionalProperties
       }
       """
 
-  Scenario: neither false nor schema
+  Scenario: when true
+  Scenario: neither boolean nor schema
     TODO: should fail loudly: move into spec
