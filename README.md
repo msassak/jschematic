@@ -17,8 +17,8 @@ fine yajl-ruby gem for testing).
 
 ## ToDo
 
+* Rename Errors to Report and use it to improve error handling
 * Implement remaining attributes for base schema validation
-* Improve error reporting and handling
 * Allow collection of validation results
 
 ## Testing
