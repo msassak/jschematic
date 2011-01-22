@@ -24,5 +24,9 @@ module Jschematic
     def accepts?(instance)
       @children.all?{ |child| child.accepts?(instance) }
     end
+
+    def required?
+      @children.any?{ |child| child.required? }
+    end
   end
 end

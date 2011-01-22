@@ -3,18 +3,21 @@ require 'jschematic/attributes/attribute'
 module Jschematic
   module Attributes
     class Properties < Attribute
-      def initialize(schema)
-        @schema = schema
+      def initialize(properties)
+        @schemas = properties.inject({}) do |schemas, (name, schema)|
+          schemas[name] = Schema.new(schema)
+          schemas
+        end
       end
 
       def accepts?(instance)
-        instance.all? do |property, value|
-          begin
-            Schema.new(@schema[property]).accepts?(value)
-          rescue ValidationError
-            false
+        @schemas.all? do |name, schema|
+          value = instance.fetch(name) do |missing|
+            return true unless schema.required?
+            fail_validation!(missing, nil)
           end
-        end || fail_validation!(@schema, instance)
+          schema.accepts?(value) || fail_validation!(name, value)
+        end
       end
     end
   end
