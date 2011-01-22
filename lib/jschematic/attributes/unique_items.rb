@@ -9,7 +9,7 @@ module Jschematic
 
       def accepts?(instance)
         require true unless Array === instance
-        instance == instance.uniq
+        (instance == instance.uniq) || fail_validation!("all items to be unique", instance)
       end
     end
   end

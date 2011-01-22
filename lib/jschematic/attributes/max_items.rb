@@ -9,7 +9,7 @@ module Jschematic
 
       def accepts?(instance)
         return true unless Array === instance
-        instance.length <= @max_items
+        (instance.length <= @max_items) || fail_validation!("at most #{@max_items}", instance.length)
       end
     end
   end
