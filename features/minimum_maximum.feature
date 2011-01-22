@@ -1,4 +1,4 @@
-Feature: Core Schema: minimum, maximum & related
+Feature: Core Schema: minimum, exclusiveMinimum, maximum & exclusiveMaximum
 
   Scenario: minimum
     When the schema is '{ "minimum": 25 }'
