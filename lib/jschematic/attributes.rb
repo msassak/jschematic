@@ -12,6 +12,7 @@ require 'jschematic/attributes/min_items'
 require 'jschematic/attributes/max_items'
 require 'jschematic/attributes/unique_items'
 require 'jschematic/attributes/min_length'
+require 'jschematic/attributes/max_length'
 
 module Jschematic
   module Attributes
