@@ -42,3 +42,16 @@ Feature: Core schema: items, minItems & maxItems
     Then '["pomegranate"]' is valid JSON
     And '["cucumber", "sativus"]' is valid JSON
     But '["apple", "orange", "pear"]' is not valid JSON
+
+  Scenario: min and max together
+    When the schema is:
+      """
+      {
+          "minItems": 1,
+          "maxItems": 2
+      }
+      """
+    Then '["pomegranate"]' is valid JSON
+    And  '["cucumber", "sativus"]' is valid JSON
+    But '["apple", "orange", "pear"]' is not valid JSON
+    And '[]' is not valid JSON
