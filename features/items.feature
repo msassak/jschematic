@@ -38,3 +38,7 @@ Feature: Core schema: items, minItems & maxItems
     But '["pomegranate"]' is not valid JSON
 
   Scenario: maxItems
+    When the schema is '{ "maxItems": 2 }'
+    Then '["pomegranate"]' is valid JSON
+    And '["cucumber", "sativus"]' is valid JSON
+    But '["apple", "orange", "pear"]' is not valid JSON

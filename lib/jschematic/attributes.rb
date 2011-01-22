@@ -9,6 +9,7 @@ require 'jschematic/attributes/maximum'
 require 'jschematic/attributes/exclusive_minimum'
 require 'jschematic/attributes/exclusive_maximum'
 require 'jschematic/attributes/min_items'
+require 'jschematic/attributes/max_items'
 
 module Jschematic
   module Attributes

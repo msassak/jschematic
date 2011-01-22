@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Jschematic
   module Attributes
-    describe MinItems, "with a minimum of two items " do
+    describe MinItems, "with a minimum of two items" do
       subject { MinItems.new(2) }
 
       describe "#accepts?" do
