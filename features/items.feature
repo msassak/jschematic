@@ -1,4 +1,4 @@
-Feature: Core schema: items, minItems, maxItems & uniqueItems
+Feature: Core schema: items, additionalItems, minItems, maxItems & uniqueItems
   Scenario: single schema
     When the schema is:
       """
@@ -28,7 +28,27 @@ Feature: Core schema: items, minItems, maxItems & uniqueItems
     And '["Felizberto", "Lil Wayne"]' is not valid JSON
 
   Scenario: tuple typing when additional items is false
+    When the schema is:
+      """
+      {
+          "items": [ { "type": "string" } ],
+          "additionalItems": false 
+      }
+      """
+    Then '["Feliberto"]' is valid JSON
+    But '["Felizberto", "Albi"]' is not valid JSON
+
   Scenario: tuple typing with additional items schema
+    When the schema is:
+      """
+      {
+          "items": [ { "type": "string" } ],
+          "additionalItems": { "type": "object" }
+      }
+      """
+    Then '["Albi", { "age": 24 }]' is valid JSON
+    But '["Albi", 24]' is not valid JSON
+
   Scenario: instance JSON is not an array
 
   Scenario: minItems

@@ -3,6 +3,7 @@ require 'jschematic/attributes/attribute'
 module Jschematic
   module Attributes
     class AdditionalProperties < Attribute
+      # TODO: rename value to allowed
       def initialize(value, &block)
         @value = value
         @properties = block.call("properties").keys
