@@ -1,4 +1,4 @@
-Feature: Core schema: items
+Feature: Core schema: items, minItems & maxItems
   Scenario: single schema
     When the schema is:
       """
@@ -30,4 +30,11 @@ Feature: Core schema: items
   Scenario: tuple typing when additional items is false
   Scenario: tuple typing with additional items schema
   Scenario: instance JSON is not an array
-              
+
+  Scenario: minItems
+    When the schema is '{ "minItems": 2 }'
+    Then '["apple", "orange", "pear"]' is valid JSON
+    And '["cucumber", "sativus"]' is valid JSON
+    But '["pomegranate"]' is not valid JSON
+
+  Scenario: maxItems
