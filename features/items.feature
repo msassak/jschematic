@@ -1,4 +1,4 @@
-Feature: Core schema: items, minItems & maxItems
+Feature: Core schema: items, minItems, maxItems & uniqueItems
   Scenario: single schema
     When the schema is:
       """
@@ -55,3 +55,16 @@ Feature: Core schema: items, minItems & maxItems
     And  '["cucumber", "sativus"]' is valid JSON
     But '["apple", "orange", "pear"]' is not valid JSON
     And '[]' is not valid JSON
+
+  Scenario: uniqueItems
+    When the schema is '{ "uniqueItems": true }'
+    Then these are valid JSON:
+      | [1,2]                    |
+      | ["a", "b"]               |
+      | [true, false]            |
+      | [{"foo": 1}, {"foo": 2}] |
+    But these are not valid JSON:
+      | [1,1]                    |
+      | ["a", "a"]               |
+      | [true, true]             |
+      | [{"foo": 1}, {"foo": 1}] |
