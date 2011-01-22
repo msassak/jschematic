@@ -45,10 +45,6 @@ module Jschematic
         end
       end
 
-      def to_s
-        "Type attribute '#{type}'"
-      end
-
       private
       
       def assert_kind_of(klassen, instance)

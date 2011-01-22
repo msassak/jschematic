@@ -7,7 +7,7 @@ module Jschematic
     end
 
     def to_s
-      "#{what} expected '#{expected}' but found '#{actual}'"
+      "#{what} expected #{expected} but found #{actual}"
     end
   end
 end

@@ -7,6 +7,10 @@ module Jschematic
         false
       end
 
+      def to_s
+        self.class.to_s
+      end
+
       private
 
       def fail_validation!(expected, actual)
