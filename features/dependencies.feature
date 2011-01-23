@@ -45,3 +45,29 @@ Feature: Core schema: dependencies
       """
       
   Scenario: depend on schema
+    When the schema is:
+      """
+      {
+          "dependencies": {
+              "foo": {
+                  "properties": {
+                      "favoriteNumber": { "type": "number" }
+                  }
+              }
+          }
+      }
+      """
+    Then this is valid JSON:
+      """
+      {
+          "foo": "bar",
+          "favoriteNumber": 3.1415
+      }
+      """
+    But this is not valid JSON:
+      """
+      {
+          "foo": "bar",
+          "favoriteNumber": "eleventy million"
+      }
+      """

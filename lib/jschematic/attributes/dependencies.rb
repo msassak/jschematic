@@ -7,19 +7,30 @@ module Jschematic
         @dependencies = dependencies
       end
 
-      def dependencies
+      def accepts?(instance)
+        instance.keys.all? do |property|
+          case deps = @dependencies[property]
+          when String, Array
+            properties = instance.keys
+            exploded_deps.all? do |dep, req|
+              properties.include?(dep) && properties.include?(req)
+            end
+          when Hash
+            Schema.new(deps).accepts?(instance)
+          else
+            true
+          end
+        end
+      end
+      
+      private
+
+      def exploded_deps
         @dependencies.collect do |key, value|
           [value].flatten.collect do |req|
             [key, req]
           end
         end.first
-      end
-
-      def accepts?(instance)
-        properties = instance.keys
-        dependencies.all? do |dependent, requirement|
-          properties.include?(dependent) && properties.include?(requirement)
-        end
       end
     end
   end
