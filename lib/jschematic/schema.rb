@@ -7,6 +7,7 @@ module Jschematic
 
     def initialize(schema)
       @schema = schema || {}
+      @default = schema.delete("default") || {}
       @children = []
 
       @schema.each_pair do |attribute, value|
@@ -22,6 +23,7 @@ module Jschematic
     end
 
     def accepts?(instance)
+      instance.merge!(@default) if instance.respond_to?(:merge)
       @children.all?{ |child| child.accepts?(instance) }
     end
 
