@@ -13,6 +13,7 @@ module Jschematic
       def accepts?(instance)
         @schemas.all? do |name, schema|
           value = instance.fetch(name) do |missing|
+            return schema.default if schema.default
             return true unless schema.required?
             fail_validation!(missing, nil)
           end
