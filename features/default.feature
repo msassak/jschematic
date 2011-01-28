@@ -36,7 +36,7 @@ Feature: Core schema: default
       """
     Then '{ "age": 35 }' is not valid JSON
 
-  Scenario: default number
+  Scenario: validation of property succeeds because of default
     When the schema is:
       """
       {
@@ -50,6 +50,23 @@ Feature: Core schema: default
       }
       """
     Then '{ "somethingElse": "foo" }' is valid JSON
+    But '{ "pi": "is delicious" }' is not valid JSON
+
+  Scenario: validation of property fails because of default
+    When the schema is:
+      """
+      {
+          "properties": {
+              "pi": {
+                  "type": "number",
+                  "required": true,
+                  "default": "is delicious"
+              }
+          }
+      }
+      """
+    Then '{ "somethingElse": "foo" }' is not valid JSON
+    But '{ "pi": 3.1415 }' is valid JSON
 
   Scenario: default for all types
     TODO: spec
