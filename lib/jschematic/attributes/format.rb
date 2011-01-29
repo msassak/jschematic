@@ -11,7 +11,7 @@ module Jschematic
         when "ip-address", "ipv6"
           Ip.new(format)
         else
-          puts "Don't recognize #{format}"
+          NullFormat.new
         end
       end
 
@@ -37,6 +37,12 @@ module Jschematic
           IPAddr.new(addr).send(@method)
         rescue ArgumentError
           false
+        end
+      end
+
+      class NullFormat
+        def accepts?(instance)
+          true
         end
       end
     end
