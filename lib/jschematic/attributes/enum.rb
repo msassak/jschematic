@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class Enum < Attribute
+    class Enum
+      include Jschematic::Element
+
       def initialize(enum)
         raise "Enum requires an Array of possible values" unless Array === enum
         @enum = enum

@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class UniqueItems < Attribute
+    class UniqueItems
+      include Jschematic::Element
+
       def initialize(value=false)
         @value = value
       end

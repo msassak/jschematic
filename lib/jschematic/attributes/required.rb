@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class Required < Attribute
+    class Required
+      include Jschematic::Element
+
       def initialize(required=false)
         case required
         when TrueClass, FalseClass

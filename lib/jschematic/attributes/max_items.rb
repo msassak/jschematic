@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class MaxItems < Attribute
+    class MaxItems
+      include Jschematic::Element
+
       def initialize(max_items)
         @max_items = max_items
       end

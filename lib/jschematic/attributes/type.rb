@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class Type < Attribute
+    class Type
+      include Jschematic::Element
+
       attr_reader :type
 
       def initialize(type)

@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class ExclusiveMaximum < Attribute
+    class ExclusiveMaximum
+      include Jschematic::Element
+
       def initialize(enabled, &block)
         @enabled = enabled
         @maximum = block.call("maximum") if block_given?

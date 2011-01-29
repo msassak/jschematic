@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class AdditionalProperties < Attribute
+    class AdditionalProperties
+      include Jschematic::Element
+
       # TODO: rename value to allowed
       def initialize(value, &block)
         @value = value

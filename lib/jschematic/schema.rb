@@ -1,8 +1,11 @@
 require 'jschematic/errors'
+require 'jschematic/element'
 require 'jschematic/attributes'
 
 module Jschematic
   class Schema
+    include Jschematic::Element
+
     attr_reader :default
 
     def initialize(schema)

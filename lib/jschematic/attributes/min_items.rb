@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class MinItems < Attribute
+    class MinItems
+      include Jschematic::Element
+
       def initialize(min_items)
         @min_items = min_items
       end

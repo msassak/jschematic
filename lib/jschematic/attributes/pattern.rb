@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class Pattern < Attribute
+    class Pattern
+      include Jschematic::Element
+
       def initialize(pattern)
         @pattern = Regexp.new(pattern)
       end

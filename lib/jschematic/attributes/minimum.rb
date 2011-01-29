@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class Minimum < Attribute
+    class Minimum
+      include Jschematic::Element
+
       attr_reader :minimum
 
       def initialize(minimum)

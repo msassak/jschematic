@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class ExclusiveMinimum < Attribute
+    class ExclusiveMinimum
+      include Jschematic::Element
+
       def initialize(enabled, &block)
         @enabled = enabled
         @minimum = block.call("minimum") if block_given?

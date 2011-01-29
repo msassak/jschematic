@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class MinLength < Attribute
+    class MinLength
+      include Jschematic::Element
+
       def initialize(length)
         @length = length
       end

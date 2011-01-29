@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class AdditionalItems < Attribute
+    class AdditionalItems
+      include Jschematic::Element
+
       def initialize(allowed, &block)
         case items = block.call("items")
         when Array

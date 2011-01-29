@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class Properties < Attribute
+    class Properties
+      include Jschematic::Element
+
       def initialize(properties)
         @schemas = properties.inject({}) do |schemas, (name, schema)|
           schemas[name] = Schema.new(schema)

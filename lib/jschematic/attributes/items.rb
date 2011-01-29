@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class Items < Attribute
+    class Items
+      include Jschematic::Element
+
       def initialize(schema)
         @schema = schema
       end

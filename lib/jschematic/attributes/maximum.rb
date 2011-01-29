@@ -1,8 +1,10 @@
-require 'jschematic/attributes/attribute'
+require 'jschematic/element'
 
 module Jschematic
   module Attributes
-    class Maximum < Attribute
+    class Maximum
+      include Jschematic::Element
+
       attr_reader :maximum
 
       def initialize(maximum)
