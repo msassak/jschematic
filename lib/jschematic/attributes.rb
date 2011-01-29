@@ -17,6 +17,7 @@ require 'jschematic/attributes/pattern'
 require 'jschematic/attributes/min_length'
 require 'jschematic/attributes/max_length'
 require 'jschematic/attributes/enum'
+require 'jschematic/attributes/format'
 
 module Jschematic
   module Attributes
