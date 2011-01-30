@@ -6,13 +6,14 @@ module Jschematic
   class Schema
     include Jschematic::Element
 
-    attr_reader :default, :title, :description
+    attr_reader :default, :title, :description, :id
 
     def initialize(schema)
       @schema = schema || {}
       @default = schema.delete("default")
       @title = schema.delete("title") || ""
       @description = schema.delete("description") || ""
+      @id = schema.delete("id") || ""
       @children = []
 
       @schema.each_pair do |attribute, value|

@@ -42,6 +42,12 @@ Then "these are not valid JSON:" do |instances|
   end
 end
 
+Then /^the id of "(.+)" is "(.+)"$/ do |title, uri|
+  schema = find_schema(@schema)
+  schema.title.should == title
+  schema.id.should == uri
+end
+
 module JschematicWorld
   def parse(json)
     Yajl::Parser.parse(json)
@@ -57,6 +63,10 @@ module JschematicWorld
   def assert_invalid(json, schema)
     assert_sanity(json, schema, false) if @sanity_check
     Jschematic.validate(json, schema).should be_false
+  end
+
+  def find_schema(raw_schema)
+    Jschematic::Schema.new(raw_schema)
   end
 
   def assert_sanity(json, schema, expect_valid=true)
