@@ -11,23 +11,19 @@ When "the schema is:" do |schema|
 end
 
 Then /^'(.+)' is valid JSON$/ do |json|
-  @json = parse(json)
-  assert_valid(@json, @schema)
+  assert_valid(parse(json), @schema)
 end
 
 Then /^'(.+)' is not valid JSON$/ do |json|
-  @json = parse(json)
-  assert_invalid(@json, @schema)
+  assert_invalid(parse(json), @schema)
 end
 
 Then "this is valid JSON:" do |json|
-  @json = parse(json)
-  assert_valid(@json, @schema)
+  assert_valid(parse(json), @schema)
 end
 
 Then "this is not valid JSON:" do |json|
-  @json = parse(json)
-  assert_invalid(@json, @schema)
+  assert_invalid(parse(json), @schema)
 end
 
 Then "these are valid JSON:" do |instances|
@@ -55,22 +51,22 @@ module JschematicWorld
     raise "Parsing '#{json}' failed with #{e.to_s}"
   end
 
-  def assert_valid(json, schema)
-    assert_sanity(json, schema, true) if @sanity_check
-    Jschematic.validate(json, schema).should be_true
+  def assert_valid(json, raw_schema)
+    assert_sanity(json, raw_schema, true) if @sanity_check
+    Jschematic.validate(json, raw_schema).should be_true
   end
 
-  def assert_invalid(json, schema)
+  def assert_invalid(json, raw_schema)
     assert_sanity(json, schema, false) if @sanity_check
-    Jschematic.validate(json, schema).should be_false
+    Jschematic.validate(json, raw_schema).should be_false
   end
 
   def find_schema(raw_schema)
     Jschematic::Schema.new(raw_schema)
   end
 
-  def assert_sanity(json, schema, expect_valid=true)
-    JSON::Schema.validate(json, schema)
+  def assert_sanity(json, raw_schema, expect_valid=true)
+    JSON::Schema.validate(json, raw_schema)
   rescue JSON::Schema::ValueError => e
     raise e if expect_valid
   end
