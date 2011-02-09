@@ -39,9 +39,8 @@ Then "these are not valid JSON:" do |instances|
 end
 
 Then /^the id of "(.+)" is "(.+)"$/ do |title, uri|
-  schema = find_schema(@schema)
-  schema.title.should == title
-  schema.id.should == uri
+  schema = build_schema.find{ |el| el.title == title }
+  [schema.title, schema.id].should == [title, uri]
 end
 
 module JschematicWorld
@@ -61,8 +60,8 @@ module JschematicWorld
     Jschematic.validate(json, raw_schema).should be_false
   end
 
-  def find_schema(raw_schema)
-    Jschematic::Schema.new(raw_schema)
+  def build_schema
+    @_schema ||= Jschematic::Schema.new(@schema)
   end
 
   def assert_sanity(json, raw_schema, expect_valid=true)

@@ -22,6 +22,12 @@ module Jschematic
           schema.accepts?(value) || fail_validation!(name, value)
         end
       end
+
+      def each(&block)
+        @schemas.values.each do |schema|
+          block.call(schema)
+        end
+      end
     end
   end
 end

@@ -6,6 +6,10 @@ module Jschematic
       false
     end
 
+    def title
+      nil
+    end
+
     def to_s
       self.class.to_s
     end
