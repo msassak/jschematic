@@ -7,11 +7,14 @@ Feature: Core Schema: type
   Scenario: number
     When the schema is '{ "type": "number" }'
     Then '3.14159' is valid JSON
+    And '-123.41235' is valid JSON
     And '2112' is valid JSON
+    But '"1234"' is not valid JSON
 
   Scenario: integer
     When the schema is '{ "type": "integer" }'
     Then '2112' is valid JSON
+    And '-12' is valid JSON
     But '3.14159' is not valid JSON
 
   Scenario: boolean
