@@ -40,7 +40,7 @@ end
 
 Then /^the id of "(.+)" is "(.+)"$/ do |title, uri|
   schema = build_schema.find{ |el| el.title == title }
-  [schema.title, schema.id].should == [title, uri]
+  [schema.title, schema.id.to_s].should == [title, uri]
 end
 
 module JschematicWorld

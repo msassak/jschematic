@@ -2,6 +2,8 @@ require 'jschematic/validation_error'
 
 module Jschematic
   module Element
+    attr_accessor :parent
+
     def required?
       false
     end

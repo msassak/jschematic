@@ -26,10 +26,13 @@ fine yajl-ruby gem for testing).
     $ cucumber
     $ rspec spec
 
+Or `rake` if you want to run both.
+
 ## Links
 
 * http://tools.ietf.org/html/draft-zyp-json-schema-03
 * https://github.com/kriszyp/json-schema
+* http://tools.ietf.org/html/rfc3986
 
 ## Copyright
 

@@ -8,6 +8,7 @@ module Jschematic
       def initialize(properties)
         @schemas = properties.inject({}) do |schemas, (name, schema)|
           schemas[name] = Schema.new(schema)
+          schemas[name].parent = self
           schemas
         end
       end
@@ -27,6 +28,10 @@ module Jschematic
         @schemas.values.each do |schema|
           block.call(schema)
         end
+      end
+
+      def id
+        @parent.id
       end
     end
   end

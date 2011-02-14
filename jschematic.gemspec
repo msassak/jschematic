@@ -7,6 +7,8 @@ Gem::Specification.new do |s|
   s.email       = "msassak@gmail.com"
   s.homepage    = "https://github.com/msassak/jschematic"
 
+  s.add_dependency 'addressable'
+
   s.add_development_dependency 'cucumber'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'yajl-ruby'

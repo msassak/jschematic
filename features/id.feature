@@ -39,14 +39,75 @@ Feature: Core schema: id
           "properties": {
               "child": {
                   "title": "Child Schema",
-                  "id": "http://www.example.com/schemas/child"
+                  "id": "http://www.example.org/schemas/child"
               }
           }
       }
       """
     Then the id of "Root Schema" is "http://www.example.com/schemas/root"
-    And the id of "Child Schema" is "http://www.example.com/schemas/child"
+    And the id of "Child Schema" is "http://www.example.org/schemas/child"
 
-  Scenario: relative URI at root
+  Scenario: absolute URI at root, relative in child
+    http://tools.ietf.org/html/rfc3986#section-5
+    http://tools.ietf.org/html/rfc3986#section-3
+
+      foo://example.com:8042/over/there?name=ferret#nose
+       \_/   \______________/\_________/ \_________/ \__/
+        |           |            |            |        |
+     scheme     authority       path        query   fragment
+
+     5.4
+
+       Within a representation with a well defined base URI of
+
+          http://a/b/c/d;p?q
+
+       a relative reference is transformed to its target URI as follows.
+
+     5.4.1.  Normal Examples
+
+        "g:h"           =  "g:h"
+        "g"             =  "http://a/b/c/g"
+        "./g"           =  "http://a/b/c/g"
+        "g/"            =  "http://a/b/c/g/"
+        "/g"            =  "http://a/g"
+        "//g"           =  "http://g"
+        "?y"            =  "http://a/b/c/d;p?y"
+        "g?y"           =  "http://a/b/c/g?y"
+        "#s"            =  "http://a/b/c/d;p?q#s"
+        "g#s"           =  "http://a/b/c/g#s"
+        "g?y#s"         =  "http://a/b/c/g?y#s"
+        ";x"            =  "http://a/b/c/;x"
+        "g;x"           =  "http://a/b/c/g;x"
+        "g;x?y#s"       =  "http://a/b/c/g;x?y#s"
+        ""              =  "http://a/b/c/d;p?q"
+        "."             =  "http://a/b/c/"
+        "./"            =  "http://a/b/c/"
+        ".."            =  "http://a/b/"
+        "../"           =  "http://a/b/"
+        "../g"          =  "http://a/b/g"
+        "../.."         =  "http://a/"
+        "../../"        =  "http://a/"
+        "../../g"       =  "http://a/g"
+
+
+    When the schema is:
+      """
+      {
+          "title": "Root Schema",
+          "id": "http://www.example.com/schemas/root/",
+          "properties": {
+              "child": {
+                  "title": "Relative Path Child Schema",
+                  "id": "child"
+              }
+          }
+      }
+      """
+    Then the id of "Root Schema" is "http://www.example.com/schemas/root/"
+    #And the id of "Fragment Child Schema" is "http://www.example.com/schemas/root#child"
+    #And the id of "Absolute Path Child Schema" is "http://www.example.com/child"
+    And the id of "Relative Path Child Schema" is "http://www.example.com/schemas/root/child"
+
   Scenario: absolute URI in branch or leaf
   Scenario: relative URI in branch or leaf

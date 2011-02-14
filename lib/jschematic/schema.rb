@@ -1,3 +1,5 @@
+require 'addressable/uri'
+
 require 'jschematic/errors'
 require 'jschematic/element'
 require 'jschematic/attributes'
@@ -8,6 +10,7 @@ module Jschematic
     include Jschematic::Element
 
     attr_reader :default, :title, :description, :id
+    attr_writer :parent
 
     def initialize(raw_schema)
       @raw_schema  = raw_schema.dup || {}
@@ -15,13 +18,15 @@ module Jschematic
       @default     = @raw_schema.delete("default")
       @title       = @raw_schema.delete("title") || ""
       @description = @raw_schema.delete("description") || ""
-      @id          = @raw_schema.delete("id") || ""
+      @id          = Addressable::URI.parse(@raw_schema.delete("id") || "")
 
       @attributes = []
 
       @raw_schema.each_pair do |attribute, value|
         begin
-          @attributes << Attributes[attribute].new(value){ |dep| @raw_schema[dep] }
+          attribute = Attributes[attribute].new(value){ |dep| @raw_schema[dep] }
+          attribute.parent = self
+          @attributes << attribute
         rescue NameError => e
           # Not finding an attribute is not necessarily an error, but this is
           # obviously not the right way to handle it. Need to find a better way to
@@ -44,6 +49,14 @@ module Jschematic
     def each(&block)
       block.call(self)
       @attributes.each{ |child| child.each(&block) }
+    end
+
+    def id
+      if @parent
+        @parent.id + @id
+      else
+        @id
+      end
     end
 
     private

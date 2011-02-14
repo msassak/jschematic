@@ -1,5 +1,5 @@
 require 'ipaddr'
-require 'uri'
+require 'addressable/uri'
 
 module Jschematic
   module Attributes
@@ -16,14 +16,18 @@ module Jschematic
       end
 
       class Uri
+        include Jschematic::Element
+
         def accepts?(uri)
-          URI.parse(uri)
-        rescue URI::InvalidURIError
+          Addressable::URI.parse(uri)
+        rescue Addressable::URI::InvalidURIError
           false
         end
       end
 
       class Ip
+        include Jschematic::Element
+
         def initialize(version)
           @method = case version
           when "ip-address"
@@ -41,6 +45,8 @@ module Jschematic
       end
 
       class NullFormat
+        include Jschematic::Element
+
         def accepts?(instance)
           true
         end
