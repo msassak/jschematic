@@ -1,14 +1,15 @@
-require 'jschematic/element'
+require 'jschematic/composite'
 
 module Jschematic
   module Attributes
     class Properties
-      include Jschematic::Element
+      include Jschematic::Composite
 
       def initialize(properties)
         @schemas = properties.inject({}) do |schemas, (name, schema)|
           schemas[name] = Schema.new(schema)
           schemas[name].parent = self
+          add_child(schemas[name])
           schemas
         end
       end
@@ -21,12 +22,6 @@ module Jschematic
             schema.default
           end
           schema.accepts?(value) || fail_validation!(name, value)
-        end
-      end
-
-      def each(&block)
-        @schemas.values.each do |schema|
-          block.call(schema)
         end
       end
 

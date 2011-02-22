@@ -6,7 +6,6 @@ require 'jschematic/attributes'
 
 module Jschematic
   class Schema
-    include Enumerable
     include Jschematic::Composite
 
     attr_reader :default, :title, :description, :id
@@ -41,12 +40,6 @@ module Jschematic
 
     def required?
       children.any?{ |child| child.required? }
-    end
-
-    # Can we move this into the composite?
-    def each(&block)
-      block.call(self)
-      children.each{ |child| child.each(&block) }
     end
 
     def id
