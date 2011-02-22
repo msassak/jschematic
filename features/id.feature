@@ -20,7 +20,7 @@ Feature: Core schema: id
     or the client passes in the URI from where the schema was retrieved, 
     which is weird, but more palatable. The current implementation does
     neither of these, but I don't think it's too important at this point. 
-    
+
     When the schema is:
       """
       {
@@ -48,49 +48,6 @@ Feature: Core schema: id
     And the id of "Child Schema" is "http://www.example.org/schemas/child"
 
   Scenario: absolute URI at root, relative in child
-    http://tools.ietf.org/html/rfc3986#section-5
-    http://tools.ietf.org/html/rfc3986#section-3
-
-      foo://example.com:8042/over/there?name=ferret#nose
-       \_/   \______________/\_________/ \_________/ \__/
-        |           |            |            |        |
-     scheme     authority       path        query   fragment
-
-     5.4
-
-       Within a representation with a well defined base URI of
-
-          http://a/b/c/d;p?q
-
-       a relative reference is transformed to its target URI as follows.
-
-     5.4.1.  Normal Examples
-
-        "g:h"           =  "g:h"
-        "g"             =  "http://a/b/c/g"
-        "./g"           =  "http://a/b/c/g"
-        "g/"            =  "http://a/b/c/g/"
-        "/g"            =  "http://a/g"
-        "//g"           =  "http://g"
-        "?y"            =  "http://a/b/c/d;p?y"
-        "g?y"           =  "http://a/b/c/g?y"
-        "#s"            =  "http://a/b/c/d;p?q#s"
-        "g#s"           =  "http://a/b/c/g#s"
-        "g?y#s"         =  "http://a/b/c/g?y#s"
-        ";x"            =  "http://a/b/c/;x"
-        "g;x"           =  "http://a/b/c/g;x"
-        "g;x?y#s"       =  "http://a/b/c/g;x?y#s"
-        ""              =  "http://a/b/c/d;p?q"
-        "."             =  "http://a/b/c/"
-        "./"            =  "http://a/b/c/"
-        ".."            =  "http://a/b/"
-        "../"           =  "http://a/b/"
-        "../g"          =  "http://a/b/g"
-        "../.."         =  "http://a/"
-        "../../"        =  "http://a/"
-        "../../g"       =  "http://a/g"
-
-
     When the schema is:
       """
       {
