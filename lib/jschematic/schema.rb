@@ -1,13 +1,13 @@
 require 'addressable/uri'
 
 require 'jschematic/errors'
-require 'jschematic/element'
+require 'jschematic/composite'
 require 'jschematic/attributes'
 
 module Jschematic
   class Schema
     include Enumerable
-    include Jschematic::Element
+    include Jschematic::Composite
 
     attr_reader :default, :title, :description, :id
     attr_writer :parent
@@ -20,13 +20,10 @@ module Jschematic
       @description = @raw_schema.delete("description") || ""
       @id          = Addressable::URI.parse(@raw_schema.delete("id") || "")
 
-      @attributes = []
-
       @raw_schema.each_pair do |attribute, value|
         begin
           attribute = Attributes[attribute].new(value){ |dep| @raw_schema[dep] }
-          attribute.parent = self
-          @attributes << attribute
+          add_child(attribute)
         rescue NameError => e
           # Not finding an attribute is not necessarily an error, but this is
           # obviously not the right way to handle it. Need to find a better way to
@@ -39,16 +36,17 @@ module Jschematic
     end
 
     def accepts?(instance)
-      @attributes.all?{ |child| child.accepts?(add_default(instance)) }
+      children.all?{ |child| child.accepts?(add_default(instance)) }
     end
 
     def required?
-      @attributes.any?{ |child| child.required? }
+      children.any?{ |child| child.required? }
     end
 
+    # Can we move this into the composite?
     def each(&block)
       block.call(self)
-      @attributes.each{ |child| child.each(&block) }
+      children.each{ |child| child.each(&block) }
     end
 
     def id
