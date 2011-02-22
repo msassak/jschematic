@@ -1,0 +1,5 @@
+== In Git
+* Extracted Composite mixin and refactored Schema and Properties to use it (Mike Sassak)
+
+== 0.0.1
+* First release (Mike Sassak)
