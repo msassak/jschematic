@@ -1,7 +1,3 @@
-Before('@sanity_check') do
-  enable_sanity_check
-end
-
 When /^the schema is '(.+)'$/ do |schema|
   @schema = parse(schema)
 end
@@ -51,28 +47,15 @@ module JschematicWorld
   end
 
   def assert_valid(json, raw_schema)
-    assert_sanity(json, raw_schema, true) if @sanity_check
     Jschematic.validate(json, raw_schema).should be_true
   end
 
   def assert_invalid(json, raw_schema)
-    assert_sanity(json, schema, false) if @sanity_check
     Jschematic.validate(json, raw_schema).should be_false
   end
 
   def build_schema
     @_schema ||= Jschematic::Schema.new(@schema)
-  end
-
-  def assert_sanity(json, raw_schema, expect_valid=true)
-    JSON::Schema.validate(json, raw_schema)
-  rescue JSON::Schema::ValueError => e
-    raise e if expect_valid
-  end
-  
-  def enable_sanity_check
-    puts "Enabling sanity check"
-    @sanity_check = true
   end
 end
 
