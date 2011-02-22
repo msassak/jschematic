@@ -73,6 +73,3 @@ Feature: Core schema: id
     And the id of "Fragment Child Schema" is "http://www.example.com/schemas/root/#child"
     And the id of "Absolute Path Child Schema" is "http://www.example.com/child"
     And the id of "Relative Path Child Schema" is "http://www.example.com/schemas/root/child"
-
-  Scenario: absolute URI in branch or leaf
-  Scenario: relative URI in branch or leaf
