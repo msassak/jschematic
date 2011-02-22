@@ -8,8 +8,17 @@ module Jschematic
   class Schema
     include Jschematic::Composite
 
+    # TODO: Spec
+    def self.with_name(raw_schema, name)
+      schema = new(raw_schema)
+      schema.name = name
+      schema
+    end
+
     attr_reader :default, :title, :description, :id
-    attr_writer :parent
+
+    attr_accessor :name
+    attr_writer   :parent
 
     def initialize(raw_schema)
       @raw_schema  = raw_schema.dup || {}

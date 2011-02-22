@@ -6,22 +6,20 @@ module Jschematic
       include Jschematic::Composite
 
       def initialize(properties)
-        @schemas = properties.inject({}) do |schemas, (name, schema)|
-          schemas[name] = Schema.new(schema)
-          schemas[name].parent = self
-          add_child(schemas[name])
-          schemas
+        properties.each_pair do |name, raw_schema|
+          schema = Schema.with_name(raw_schema, name)
+          add_child(schema)
         end
       end
 
       def accepts?(instance)
-        @schemas.all? do |name, schema|
-          value = instance.fetch(name) do |missing|
-            return true unless schema.required?
-            fail_validation!(missing, nil) unless schema.default 
-            schema.default
+        children.all? do |child|
+          value = instance.fetch(child.name) do |missing|
+            return true unless child.required?
+            fail_validation!(missing, nil) unless child.default
+            child.default
           end
-          schema.accepts?(value) || fail_validation!(name, value)
+          child.accepts?(value) || fail_validation!(child.name, value)
         end
       end
 
