@@ -85,7 +85,7 @@ Feature: Core Schema: properties & additionalProperties
       }
       """
 
-  Scenario: additionalProperties defined by a schema 
+  Scenario: additionalProperties defined by a schema
     When the schema is:
       """
       {

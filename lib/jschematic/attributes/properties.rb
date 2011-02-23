@@ -14,17 +14,38 @@ module Jschematic
 
       def accepts?(instance)
         children.all? do |child|
-          value = instance.fetch(child.name) do |missing|
-            return true unless child.required?
-            fail_validation!(missing, nil) unless child.default
-            child.default
+          match = find_instance_for(instance, child.name)
+
+          if match
+            value = match.last
+          else
+            value = nil
           end
-          child.accepts?(value) || fail_validation!(child.name, value)
+
+          if !value and child.default
+            value = child.default
+          end
+
+          if !value and child.required?
+            fail_validation!("#{child.name} is required", nil)
+          elsif !value
+            true
+          else
+            child.accepts?(value) || fail_validation!(child.name, value)
+          end
         end
       end
 
       def id
         @parent.id
+      end
+
+      private
+
+      def find_instance_for(instance, wanted_name)
+        instance.find do |property_name, _|
+          property_name == wanted_name
+        end
       end
     end
   end

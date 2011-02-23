@@ -13,6 +13,7 @@ Feature: Core schema: patternProperties
       | { "name": "Felizberto" }        |
       | { "firstName": "Fitzheraldo" }  |
       | { "fullName": "Inigo Montoya" } |
+      | { "doesNotMatch": 12345678 }    |
     But these are not valid JSON:
-      | { "name": 2112 }      |
-      | { "named": "Werner" } | 
+      | { "name": 2112 }         |
+      | { "aNiceName": [1,2,3] } |

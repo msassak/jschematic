@@ -15,7 +15,6 @@ Feature: Core schema: default
               "name": "Gristle Thornbody"
           }
       }
-
       """
       Then '{ "age": 35 }' is valid JSON
 
