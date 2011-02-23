@@ -1,4 +1,4 @@
-== In Git
+== 0.0.2
 * Refactored Properties and PatternProperties so the latter inherits from the former (Mike Sassak)
 * Simple IPv4 CIDR format support (Mike Sassak)
 * Extracted Composite mixin and refactored Schema and Properties to use it (Mike Sassak)
