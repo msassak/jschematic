@@ -23,6 +23,21 @@ Feature: Core schema: format
       | ""                         |
       | "fe80::202:b3ff:fe1e:8329" |
 
+  Scenario: IPv4 CIDR
+    When the schema is:
+      """
+      {
+          "type": "string",
+          "format": "cidr"
+      }
+      """
+    Then '"192.168.0.1/23"' is valid JSON
+    But these are not valid JSON:
+      | ""            |
+      | "192.168.0.1" |
+      | "6.7.8.9/0"   |
+      | "1.2.3.4/33"  |
+
   Scenario: IPv6
     When the schema is:
       """

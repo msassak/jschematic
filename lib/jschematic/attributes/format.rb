@@ -10,6 +10,8 @@ module Jschematic
           Uri.new
         when "ip-address", "ipv6"
           Ip.new(format)
+        when "cidr"
+          Cidr.new(format)
         else
           NullFormat.new
         end
@@ -41,6 +43,16 @@ module Jschematic
           IPAddr.new(addr).send(@method)
         rescue ArgumentError
           false
+        end
+      end
+
+      class Cidr
+        include Jschematic::Element
+
+        def accepts?(addr_with_cidr)
+          addr, cidr = addr_with_cidr.split("/")
+          return false unless cidr && (1..32).include?(cidr.to_i)
+          Ip.new("ip-address").accepts?(addr)
         end
       end
 
