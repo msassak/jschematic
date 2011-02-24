@@ -42,6 +42,7 @@ Or `rake` if you want to run both.
 * http://tools.ietf.org/html/draft-zyp-json-schema-03
 * https://github.com/kriszyp/json-schema
 * http://tools.ietf.org/html/rfc3986
+* https://groups.google.com/d/topic/json-schema/lftABvH5KkA/discussion
 
 ## Copyright
 
