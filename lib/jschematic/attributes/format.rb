@@ -1,5 +1,6 @@
 require 'ipaddr'
 require 'addressable/uri'
+require 'date'
 
 module Jschematic
   module Attributes
@@ -51,6 +52,26 @@ module Jschematic
           addr, cidr = addr_with_cidr.split("/")
           return false unless cidr && (1..32).include?(cidr.to_i)
           IpAddress.new.accepts?(addr)
+        end
+      end
+
+      class DateTime
+        include Jschematic::Element
+
+        def accepts?(date_time)
+          ::DateTime.strptime(date_time)
+        rescue ArgumentError
+          false
+        end
+      end
+
+      class Date
+        include Jschematic::Element
+
+        def accepts?(date)
+          ::Date.strptime(date)
+        rescue ArgumentError
+          false
         end
       end
 

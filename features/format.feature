@@ -53,3 +53,37 @@ Feature: Core schema: format
     But these are not valid JSON:
       | ""          |
       | "127.0.0.1" |
+
+  Scenario: Date-Time
+    When the schema is:
+      """
+      {
+          "type": "string",
+          "format": "date-time"
+      }
+      """
+    Then these are valid JSON:
+      | "1999-12-31T23:59:59Z" |
+      | "2011-02-27T10:12:13Z" |
+      | "1980-02-29T08:51:32Z" |
+    But these are not valid JSON:
+      | "1999-12-31"           |
+      | "1981-02-29T01:01:01Z" |
+      | "August 1st, 1986"     |
+
+  Scenario: Date
+    When the schema is:
+      """
+      {
+          "type": "string",
+          "format": "date"
+      }
+      """
+    Then these are valid JSON:
+      | "1999-12-31" |
+      | "2011-02-27" |
+      | "1980-02-29" |
+    But these are not valid JSON:
+      | "1981-02-29"       |
+      | "August 1st, 1986" |
+
