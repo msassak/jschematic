@@ -5,16 +5,13 @@ module Jschematic
   module Attributes
     module Format
       def self.new(format)
-        case format
-        when "uri"
-          Uri.new
-        when "ip-address", "ipv6"
-          Ip.new(format)
-        when "cidr"
-          Cidr.new(format)
-        else
-          NullFormat.new
+        format_class = format.split(/[^\w\d]/).inject("") do |name, part|
+          name << part.capitalize
         end
+
+        const_get(format_class).new
+      rescue NameError
+        NullFormat.new(format)
       end
 
       class Uri
@@ -27,20 +24,21 @@ module Jschematic
         end
       end
 
-      class Ip
+      class IpAddress
         include Jschematic::Element
 
-        def initialize(version)
-          @method = case version
-          when "ip-address"
-            :ipv4?
-          when "ipv6"
-            :ipv6?
-          end
+        def accepts?(addr)
+          IPAddr.new(addr).ipv4?
+        rescue ArgumentError
+          false
         end
+      end
+
+      class Ipv6
+        include Jschematic::Element
 
         def accepts?(addr)
-          IPAddr.new(addr).send(@method)
+          IPAddr.new(addr).ipv6?
         rescue ArgumentError
           false
         end
@@ -52,12 +50,17 @@ module Jschematic
         def accepts?(addr_with_cidr)
           addr, cidr = addr_with_cidr.split("/")
           return false unless cidr && (1..32).include?(cidr.to_i)
-          Ip.new("ip-address").accepts?(addr)
+          IpAddress.new.accepts?(addr)
         end
       end
 
       class NullFormat
         include Jschematic::Element
+        attr_reader :format
+
+        def initialize(format)
+          @format = format
+        end
 
         def accepts?(instance)
           true
