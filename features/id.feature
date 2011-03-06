@@ -1,4 +1,10 @@
 Feature: Core schema: id
+
+  See: https://groups.google.com/d/msg/json-schema/lftABvH5KkA/KW93ZX-JdpsJ
+  for an explanation. The relevant part is "URIs, not URLs", i.e. id attributes
+  are for *identifying* schemas, not for *locating* them. No retrieval is
+  necessary.
+
   Scenario: absolute URI, single schema
     When the schema is:
       """
@@ -10,17 +16,6 @@ Feature: Core schema: id
     Then the id of "Test Schema" is "http://www.example.com/schemas/json"
 
   Scenario: relative URI, single schema
-    I-D says: "If this schema is not contained in any parent schema, the 
-    current URI of the parent schema is held to be the URI under which 
-    this schema was addressed."
-
-    I think this means that the id of the root schema is taken to be the 
-    URI from which the schema was retrieved, i.e. schema validators are
-    supposed to include an HTTP client, which seems a bit bonkers to me,
-    or the client passes in the URI from where the schema was retrieved, 
-    which is weird, but more palatable. The current implementation does
-    neither of these, but I don't think it's too important at this point. 
-
     When the schema is:
       """
       {
