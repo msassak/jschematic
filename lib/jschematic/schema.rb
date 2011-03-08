@@ -15,7 +15,7 @@ module Jschematic
       schema
     end
 
-    attr_reader :default, :title, :description, :id
+    attr_reader :default, :title, :description
 
     attr_accessor :name
     attr_writer   :parent
@@ -49,14 +49,6 @@ module Jschematic
 
     def required?
       children.any?{ |child| child.required? }
-    end
-
-    def id
-      if @parent
-        @parent.id + @id
-      else
-        @id
-      end
     end
 
     private

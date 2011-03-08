@@ -3,6 +3,7 @@ require 'jschematic/validation_error'
 module Jschematic
   module Element
     attr_accessor :parent
+    attr_writer   :id
 
     def required?
       false
@@ -10,6 +11,14 @@ module Jschematic
 
     def title
       nil
+    end
+
+    def id
+      if @parent
+        @parent.id + @id
+      else
+        @id
+      end
     end
 
     def to_s

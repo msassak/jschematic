@@ -32,27 +32,14 @@ module Jschematic
         description.should == ""
       end
     end
-  end
 
-  class Parent
-    attr_reader :id
-    def initialize(opts)
-      @id = opts["id"]
-      @children = []
-    end
-
-    def add_child(child)
-      child.parent = self
-      @children << child
-    end
-  end
-
-  describe Schema, "as a child element" do
-    it "builds its id from its parent" do
-      parent = Parent.new("id" => "http://www.example.com/parent/")
-      schema = Schema.new("id" => "child")
-      parent.add_child(schema)
-      schema.id.should == "http://www.example.com/parent/child"
+    describe "#id" do
+      it "is built from the parent's id" do
+        parent = Parent.new("id" => "http://www.example.com/parent/")
+        schema = Schema.new("id" => "child")
+        parent.add_child(schema)
+        schema.id.should == "http://www.example.com/parent/child"
+      end
     end
   end
 end
