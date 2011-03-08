@@ -19,7 +19,7 @@ implemented.
 Please report any bugs you find (and you will find bugs) at the issue
 tracker here: https://github.com/msassak/jschematic/issues.
 
-## Usage
+## Basic Usage
 
     require 'jschematic'
     Jschematic.validate(json, schema)  # => true or false
@@ -29,6 +29,10 @@ tracker here: https://github.com/msassak/jschematic/issues.
 
 Jschematic doesn't care how you turn JSON into Ruby (though we use the
 fine yajl-ruby gem for testing).
+
+## Advanced Usage
+
+See ...
 
 ## Testing
 
