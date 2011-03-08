@@ -14,10 +14,20 @@ RSpec::Matchers.define :accept do |instance_value|
   end
 end
 
-class Parent
-	include Jschematic::Composite
+module Jschematic
+  class Parent
+    include Jschematic::Composite
 
-	def initialize(opts)
-		self.id = opts["id"]
-	end
+    def initialize(opts)
+      self.id = opts["id"]
+    end
+  end
+
+  class Child
+    include Jschematic::Element
+
+    def accepts?(instance)
+      !!instance
+    end
+  end
 end
