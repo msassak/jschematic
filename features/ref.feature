@@ -44,5 +44,19 @@ Feature: Core schema: $ref
       """
 
   Scenario: Ref with relative path resolves to the same schema
+
   Scenario: Ref resolves to different schema
+    Given the schema:
+      """
+      """
+    And this schema:
+      """
+      """
+    Then this is valid JSON:
+      """
+      """
+    But this is not valid JSON:
+      """
+      """
+
   Scenario: Ref appears before the id it references
