@@ -19,7 +19,7 @@ module Jschematic
     end
 
     def to_s
-      "Cannot find schema for reference #{uri}"
+      "Cannot find schema for reference '#{uri}'"
     end
   end
 end
