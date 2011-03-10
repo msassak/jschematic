@@ -18,11 +18,13 @@ require 'jschematic/attributes/min_length'
 require 'jschematic/attributes/max_length'
 require 'jschematic/attributes/enum'
 require 'jschematic/attributes/format'
+require 'jschematic/attributes/ref'
 
 module Jschematic
   module Attributes
     def self.[](name)
-      const_get(name[0].chr.capitalize + name[1..-1])
+      name_without_meta = name.gsub(/^\$/, '')
+      const_get(name_without_meta[0].chr.capitalize + name_without_meta[1..-1])
     end
   end
 end

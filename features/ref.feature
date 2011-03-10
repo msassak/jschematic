@@ -3,12 +3,12 @@ Feature: Core schema: $ref
     When the schema is:
       """
       {
-          "id": "person",
+          "id": "http://www.example.com/schemas/person",
           "title": "The Best Person Schema Ever",
           "properties": {
               "name": { "type": "string" },
               "age": { "type": "integer" },
-              "favorite_person": { "$ref": "person" }
+              "favorite_person": { "$ref": "http://www.example.com/schemas/person" }
           }
       }
       """
@@ -19,7 +19,15 @@ Feature: Core schema: $ref
           "age": 24,
           "favorite_person": {
               "name": "Lil Wayne Pangles",
-              "age": 9000
+              "age": 52,
+              "favorite_person": {
+                  "name": "Birdman Pangles",
+                  "age": 71,
+                  "favorite_person": {
+                      "name": "Best here to be silent",
+                      "age": 105
+                  }
+              }
           }
       }
       """
@@ -38,3 +46,4 @@ Feature: Core schema: $ref
   Scenario: Ref with relative path resolves to the same schema
   Scenario: Ref resolution fails
   Scenario: Ref resolves to different schema
+  Scenario: Ref appears before the id it references

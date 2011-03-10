@@ -15,6 +15,18 @@ module Jschematic
       schema
     end
 
+    def self.schema_for(ref)
+      schemas[ref]
+    end
+
+    def self.add_schema(id, schema)
+      schemas[id] = schema
+    end
+
+    def self.schemas
+      @schemas ||= {}
+    end
+
     attr_reader :default, :title, :description
 
     attr_accessor :name
@@ -27,6 +39,8 @@ module Jschematic
       @title       = @raw_schema.delete("title") || ""
       @description = @raw_schema.delete("description") || ""
       @id          = Addressable::URI.parse(@raw_schema.delete("id") || "")
+
+      self.class.add_schema(@id, self) unless @id.to_s.empty?
 
       @raw_schema.each_pair do |attribute, value|
         begin
