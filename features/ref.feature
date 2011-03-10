@@ -44,6 +44,5 @@ Feature: Core schema: $ref
       """
 
   Scenario: Ref with relative path resolves to the same schema
-  Scenario: Ref resolution fails
   Scenario: Ref resolves to different schema
   Scenario: Ref appears before the id it references

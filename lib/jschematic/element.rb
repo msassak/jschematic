@@ -1,4 +1,4 @@
-require 'jschematic/validation_error'
+require 'jschematic/exceptions'
 
 module Jschematic
   module Element

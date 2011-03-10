@@ -10,4 +10,16 @@ module Jschematic
       "#{what} expected #{expected} but found #{actual}"
     end
   end
+
+  class SchemaNotFoundError < StandardError
+    attr_reader :uri
+
+    def initialize(uri)
+      @uri = uri
+    end
+
+    def to_s
+      "Cannot find schema for reference #{uri}"
+    end
+  end
 end
