@@ -90,7 +90,7 @@ Feature: Core schema: $ref
       """
 
   Scenario: Ref resolves to different schema
-    Given this schema:
+    Given the validation context contains this schema:
       """
       {
           "id": "http://www.example.com/schemas/person",
@@ -101,7 +101,7 @@ Feature: Core schema: $ref
           }
       }
       """
-    And this schema:
+    When the schema is:
       """
       {
           "title": "A Happy Family Much Like All Other Happy Families",

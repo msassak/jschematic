@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jschematic (0.0.2)
+    jschematic (0.0.5)
       addressable
 
 GEM

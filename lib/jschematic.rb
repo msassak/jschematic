@@ -1,13 +1,13 @@
 require 'jschematic/context'
 
 module Jschematic
-  def self.validate(instance, *schemas)
-    validate!(instance, *schemas)
+  def self.validate(instance, schema, opts={})
+    validate!(instance, schema, opts)
   rescue ValidationError
     false
   end
 
-  def self.validate!(instance, *schemas)
-    Context.new(*schemas).validate!(instance)
+  def self.validate!(instance, schema, opts={})
+    Context.new(*opts[:context]).validate!(instance, schema)
   end
 end
