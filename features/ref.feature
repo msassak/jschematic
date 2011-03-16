@@ -92,15 +92,47 @@ Feature: Core schema: $ref
   Scenario: Ref resolves to different schema
     Given this schema:
       """
+      {
+          "id": "http://www.example.com/schemas/person",
+          "title": "The Best Person Schema Ever",
+          "properties": {
+              "name": { "type": "string" },
+              "age": { "type": "integer" }
+          }
+      }
       """
     And this schema:
       """
+      {
+          "title": "A Happy Family Much Like All Other Happy Families",
+          "type": "array",
+          "items": {
+              "$ref": "http://www.example.com/schemas/person"
+          }
+      }
       """
     Then this is valid JSON:
       """
+      [
+          {
+              "name": "Anna Arkadyevna Karenina",
+              "age": 18
+          },
+
+          {
+              "name": "Count Alexei Kirillovich Vronsky",
+              "age": 25
+          }
+      ]
       """
     But this is not valid JSON:
       """
+      [
+          {
+              "name": "The Underground Man",
+              "age": "timeless"
+          }
+      ]
       """
 
   Scenario: Ref appears before the id it references

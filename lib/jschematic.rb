@@ -1,13 +1,13 @@
-require 'jschematic/schema'
+require 'jschematic/context'
 
 module Jschematic
-  def self.validate(instance, schema)
-    validate!(instance, schema)
+  def self.validate(instance, *schemas)
+    validate!(instance, *schemas)
   rescue ValidationError
     false
   end
 
-  def self.validate!(instance, schema)
-    Schema.new(schema).accepts?(instance)
+  def self.validate!(instance, *schemas)
+    Context.new(*schemas).validate!(instance)
   end
 end
