@@ -2,22 +2,21 @@
 
 Jschematic is a JSON Schema v3 Validator for Ruby.
 
-It is currently incomplete, alpha quality software.
+It is currently pre-release software. The basics work fairly well, but
+it is a work in progress.
 
-Having said that, most of the core schema definition is supported
-with these exceptions:
+Most of the core schema definition is supported with these exceptions:
 
- * $ref
  * $schema
  * extends
  * divisibleBy
  * disallow
 
-In addition to this, only IPv4, IPv6 and URI formats are currently
+In addition to this, only DateTime, Date, IPv4, IPv6 and URI formats are currently
 implemented.
 
-Please report any bugs you find (and you will find bugs) at the issue
-tracker here: https://github.com/msassak/jschematic/issues.
+Please report any bugs you find in the issue tracker here: 
+https://github.com/msassak/jschematic/issues.
 
 ## Basic Usage
 
@@ -32,7 +31,7 @@ fine yajl-ruby gem for testing).
 
 ## Advanced Usage
 
-See ...
+Hasn't been documented yet.
 
 ## Testing
 

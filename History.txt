@@ -1,3 +1,9 @@
+== 0.0.5
+* Initial support for validation contexts (Mike Sassak)
+* $ref support (Mike Sassak)
+* Basic DateTime, Date support (Mike Sassak)
+* Separate IPv4 and IPv6 classes (Mike Sassak)
+
 == 0.0.2
 * Refactored Properties and PatternProperties so the latter inherits from the former (Mike Sassak)
 * Simple IPv4 CIDR format support (Mike Sassak)
