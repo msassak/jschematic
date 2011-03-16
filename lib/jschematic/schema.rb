@@ -16,7 +16,14 @@ module Jschematic
     end
 
     def self.schema_for(ref)
-      schemas[ref]
+      if ref.relative?
+        rel = ref.omit(:scheme, :host, :port)
+        if match = schemas.find{ |ref, _| rel == ref.omit(:scheme, :host, :port) }
+          match[-1]
+        end
+      else
+        schemas[ref]
+      end
     end
 
     def self.add_schema(id, schema)
