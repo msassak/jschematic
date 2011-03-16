@@ -1,3 +1,6 @@
+== 0.0.6
+* Improve and document the Context API (Mike Sassak)
+
 == 0.0.5
 * Initial support for validation contexts (Mike Sassak)
 * $ref support (Mike Sassak)

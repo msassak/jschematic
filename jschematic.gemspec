@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'jschematic'
-  s.version     = '0.0.5'
+  s.version     = '0.0.6'
   s.authors     = ["Mike Sassak"]
   s.description = "JSON Schema v3 Validator"
   s.summary     = "jschematic #{s.version}"
