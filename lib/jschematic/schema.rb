@@ -34,7 +34,7 @@ module Jschematic
       @schemas ||= {}
     end
 
-    attr_reader :default, :title, :description, :schema
+    attr_reader :default, :title, :description, :schema, :unknown_attributes
 
     attr_accessor :name
     attr_writer   :parent
@@ -48,6 +48,8 @@ module Jschematic
       @schema      = @raw_schema.delete("$schema")
       @id          = Addressable::URI.parse(@raw_schema.delete("id") || "")
 
+      @unknown_attributes = {}
+
       self.class.add_schema(@id, self) unless @id.to_s.empty?
 
       @raw_schema.each_pair do |attribute, value|
@@ -55,12 +57,8 @@ module Jschematic
           attribute = Attributes[attribute].new(value){ |dep| @raw_schema[dep] }
           add_child(attribute)
         rescue NameError => e
-          # Not finding an attribute is not necessarily an error, but this is
-          # obviously not the right way to handle it. Need to find a better way to
-          # report information.
-          # should we create accessors for property on the schema?
-          # we could have Attributes.[] raise a special exception rather than NameError
-          puts "NameError #{e} encountered... continuing"
+          warn "Attribute lookup failed for '#{attribute}' with: #{e.message}" if Jschematic.debug
+          @unknown_attributes[attribute] = value
         end
       end
     end

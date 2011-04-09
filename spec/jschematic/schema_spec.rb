@@ -50,5 +50,12 @@ module Jschematic
         Schema.new({}).schema.should be_nil
       end
     end
+
+    describe "#unknown_attributes" do
+      it "contains all the unknown attributes from the input schema" do
+        schema = Schema.new({ "flarble" => [:oh, :my, :blargle], "type" => "string" })
+        schema.unknown_attributes.should == { "flarble" => [:oh, :my, :blargle] }
+      end
+    end
   end
 end

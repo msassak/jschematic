@@ -1,6 +1,8 @@
 == In Git
 * Store $schema values on Schema objects if available (Mike Sassak)
 * Support divisibleBy (Mike Sassak)
+* Store unknown schema attributes on the schema, and warn when Jschematic.debug 
+  is set to true (Mike Sassak)
 
 == 0.0.6
 * Improve and document the Context API (Mike Sassak)
