@@ -34,7 +34,7 @@ module Jschematic
       @schemas ||= {}
     end
 
-    attr_reader :default, :title, :description
+    attr_reader :default, :title, :description, :schema
 
     attr_accessor :name
     attr_writer   :parent
@@ -45,6 +45,7 @@ module Jschematic
       @default     = @raw_schema.delete("default")
       @title       = @raw_schema.delete("title") || ""
       @description = @raw_schema.delete("description") || ""
+      @schema      = @raw_schema.delete("$schema")
       @id          = Addressable::URI.parse(@raw_schema.delete("id") || "")
 
       self.class.add_schema(@id, self) unless @id.to_s.empty?

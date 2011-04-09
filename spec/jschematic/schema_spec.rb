@@ -41,5 +41,14 @@ module Jschematic
         schema.id.should == "http://www.example.com/parent/child"
       end
     end
+
+    describe "#schema" do
+      it "contains the value of the $schema property if it exists" do
+        schema = Schema.new({ "$schema" => "http://json-schema.org/draft-03/schema#" }).schema
+        schema.should == "http://json-schema.org/draft-03/schema#"
+
+        Schema.new({}).schema.should be_nil
+      end
+    end
   end
 end
