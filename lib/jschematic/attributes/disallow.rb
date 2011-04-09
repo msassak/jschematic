@@ -4,7 +4,7 @@ module Jschematic
       # disallow inverts the type attribute, so it succeeds if type fails
       def accepts?(instance)
         inverted = begin
-          super or fail_validation!("instance not to be of type '#{type}'", instance)
+          super
           false
         rescue ValidationError
           true

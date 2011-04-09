@@ -28,7 +28,7 @@ module Jschematic
         when /^any$/
           true
         when Array # union
-          # TODO: this is gross. A specific Union type is likely called for.
+          # TODO: this is gross. A specific Union type is likely called for
           type.any? do |union_type|
             begin
               if String===union_type
@@ -39,16 +39,16 @@ module Jschematic
             rescue ValidationError
               false
             end
-          end
-        else 
-          # TODO: probably worth just putting in explicit mapping for all 
+          end || fail_validation!(type, instance)
+        else
+          # TODO: probably worth just putting in explicit mapping for all
           # JSON schema types--there are only a few left
           assert_kind_of([constantize(type)], instance)
         end
       end
 
       private
-      
+
       def assert_kind_of(klassen, instance)
         klassen.any?{ |klass| instance.kind_of?(klass) } || fail_validation!(klassen, instance)
       end
