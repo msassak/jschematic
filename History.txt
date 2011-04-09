@@ -1,3 +1,7 @@
+== In Git
+* Store $schema values on Schema objects if available (Mike Sassak)
+* Support divisibleBy (Mike Sassak)
+
 == 0.0.6
 * Improve and document the Context API (Mike Sassak)
 
