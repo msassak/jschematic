@@ -35,7 +35,7 @@ Pass extra schemas to inform the validation context:
 
     Jschematic.validate(json, schema, :context => [cs1, cs2])
 
-Each context schema will be consulting in those cases where cross-schema
+Each context schema will be consulted in those cases where cross-schema
 referencing is allowed, e.g. $ref.
 
 ## Testing
