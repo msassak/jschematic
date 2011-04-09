@@ -12,8 +12,7 @@ module Jschematic
       end
 
       def accepts?(number)
-        return true unless minimum
-        return true unless (number.kind_of?(Integer) || number.kind_of?(Float))
+        return true unless Numeric === number
 
         (number >= minimum) || fail_validation!(">= #{@minimum}", number)
       end

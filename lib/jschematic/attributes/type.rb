@@ -18,7 +18,7 @@ module Jschematic
         when /^object$/
           assert_kind_of([Hash], instance)
         when /^number$/
-          assert_kind_of([Float, Integer], instance)
+          assert_kind_of([Numeric], instance)
         when /^integer$/
           assert_kind_of([Integer], instance)
         when /^boolean$/
