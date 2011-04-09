@@ -135,4 +135,3 @@ Feature: Core schema: $ref
       ]
       """
 
-  Scenario: Ref appears before the id it references
