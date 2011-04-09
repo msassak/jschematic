@@ -84,6 +84,7 @@ Feature: Core schema: format
       | "2011-02-27" |
       | "1980-02-29" |
     But these are not valid JSON:
-      | "1981-02-29"       |
-      | "August 1st, 1986" |
+      | "1981-02-29"           |
+      | "August 1st, 1986"     |
+      | "1980-02-29T08:51:32Z" |
 

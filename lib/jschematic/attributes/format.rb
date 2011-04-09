@@ -69,6 +69,7 @@ module Jschematic
         include Jschematic::Element
 
         def accepts?(date)
+          raise ArgumentError unless date =~ /^\d{4}-\d{2}-\d{2}$/
           ::Date.strptime(date)
         rescue ArgumentError
           false
