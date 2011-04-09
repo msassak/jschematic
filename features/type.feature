@@ -61,12 +61,12 @@ Feature: Core Schema: type
     When the schema is '{ "type": ["string", "null"] }'
     Then 'null' is valid JSON
 
-  Scenario: union with schema element 
+  Scenario: union with schema element
     When the schema is:
       """
       {
           "type": [
-              "string", 
+              "string",
               { "type": "integer", "maximum": 2112 }
           ]
       }
