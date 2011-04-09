@@ -9,17 +9,24 @@ but it is not a primary focus of development.
 
 ## Status
 
-Most of the core schema definition is supported with these exceptions:
+The core schema definition is supported with these exceptions:
 
- * $schema
  * extends
  * divisibleBy
  * disallow
 
-In addition to this, only DateTime, Date, IPv4, IPv6 and URI formats are currently
-implemented.
+The format attribute supports only these formats:
 
-Please report any bugs you find in the issue tracker here: 
+ * date-time
+ * date
+ * ip-address
+ * ipv6
+ * uri
+
+Adding ad-hoc support for different formats should be relatively painless.
+Look in jschematic/attributes/format.rb to get started.
+
+Please report any bugs you find in the issue tracker here:
 https://github.com/msassak/jschematic/issues.
 
 ## Basic Usage
