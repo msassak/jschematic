@@ -18,6 +18,7 @@ require 'jschematic/attributes/min_length'
 require 'jschematic/attributes/max_length'
 require 'jschematic/attributes/enum'
 require 'jschematic/attributes/format'
+require 'jschematic/attributes/divisible_by'
 require 'jschematic/attributes/ref'
 
 module Jschematic

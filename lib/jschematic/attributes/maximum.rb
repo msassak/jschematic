@@ -10,7 +10,7 @@ module Jschematic
       def initialize(maximum)
         @maximum = maximum
       end
-      
+
       def accepts?(number)
         return true unless maximum
         return true unless (number.kind_of?(Integer) || number.kind_of?(Float))

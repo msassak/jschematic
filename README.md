@@ -12,7 +12,6 @@ but it is not a primary focus of development.
 The core schema definition is supported with these exceptions:
 
  * extends
- * divisibleBy
  * disallow
 
 The format attribute supports only these formats:
