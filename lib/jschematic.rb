@@ -8,6 +8,7 @@ module Jschematic
   end
 
   def self.validate!(instance, schema, opts={})
+    self.debug = opts[:debug]
     Context.new(*opts[:context]).validate!(instance, schema)
   end
 

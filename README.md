@@ -5,14 +5,13 @@ schemas conforming to the most recent version of the JSON Schema draft
 standard, which today means v3.
 
 Supporting older versions of the standard is not out of the question,
-but it is not a primary focus of development.
+but it is not a primary development focus.
 
 ## Status
 
 The core schema definition is supported with these exceptions:
 
  * extends
- * disallow
 
 The format attribute supports only these formats:
 
@@ -47,6 +46,13 @@ Pass extra schemas to inform the validation context:
 
 Each context schema will be consulted in those cases where cross-schema
 referencing is allowed, e.g. $ref.
+
+To enable debugging support, set :debug to true in the options hash:
+
+    Jschematic.validate!(json, schema, :debug => true)
+
+With debugging on a warning is printed when schema contain unknown
+attributes.
 
 ## Testing
 
