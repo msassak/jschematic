@@ -20,6 +20,7 @@ require 'jschematic/attributes/enum'
 require 'jschematic/attributes/format'
 require 'jschematic/attributes/divisible_by'
 require 'jschematic/attributes/disallow'
+require 'jschematic/attributes/extends'
 require 'jschematic/attributes/ref'
 
 module Jschematic
