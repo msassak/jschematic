@@ -14,7 +14,7 @@ module Jschematic
     end
 
     def id
-      if @parent
+      if @parent.respond_to?(:id)
         @parent.id + @id
       else
         @id

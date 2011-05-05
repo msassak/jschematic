@@ -18,10 +18,10 @@ module Jschematic
     attr_reader :default, :title, :description, :schema, :unknown_attributes
 
     attr_accessor :name
-    attr_writer   :parent
 
-    def initialize(raw_schema)
+    def initialize(raw_schema, parent = Context.empty)
       @raw_schema  = raw_schema.dup || {}
+      @parent = parent
 
       @default     = @raw_schema.delete("default")
       @title       = @raw_schema.delete("title") || ""
@@ -31,7 +31,7 @@ module Jschematic
 
       @unknown_attributes = {}
 
-      Context.add_schema(@id, self) unless @id.to_s.empty?
+      @parent.add_schema(@id, self) unless @id.to_s.empty?
 
       @raw_schema.each_pair do |attribute, value|
         begin
@@ -53,7 +53,7 @@ module Jschematic
     end
 
     def schema_for(ref)
-      Context.schema_for(ref)
+      parent.schema_for(ref)
     end
 
     private
