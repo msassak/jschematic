@@ -16,22 +16,7 @@ module Jschematic
     end
 
     def self.schema_for(ref)
-      if ref.relative?
-        rel = ref.omit(:scheme, :host, :port)
-        if match = schemas.find{ |ref, _| rel == ref.omit(:scheme, :host, :port) }
-          match[-1]
-        end
-      else
-        schemas[ref]
-      end
-    end
-
-    def self.add_schema(id, schema)
-      schemas[id] = schema
-    end
-
-    def self.schemas
-      @schemas ||= {}
+      Context.schema_for(ref)
     end
 
     attr_reader :default, :title, :description, :schema, :unknown_attributes
@@ -50,7 +35,7 @@ module Jschematic
 
       @unknown_attributes = {}
 
-      self.class.add_schema(@id, self) unless @id.to_s.empty?
+      Context.add_schema(@id, self) unless @id.to_s.empty?
 
       @raw_schema.each_pair do |attribute, value|
         begin
