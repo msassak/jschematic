@@ -9,9 +9,8 @@ but it is not a primary development focus.
 
 ## Status
 
-The core schema definition is supported with these exceptions:
-
- * extends
+Core schema: fully supported
+Hyper schema: not supported
 
 The format attribute supports only these formats:
 
