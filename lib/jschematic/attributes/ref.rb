@@ -12,7 +12,7 @@ module Jschematic
       end
 
       def accepts?(instance)
-        schema = Schema.schema_for(@uri) || raise(SchemaNotFoundError.new(@uri))
+        schema = schema_for(@uri) || raise(SchemaNotFoundError.new(@uri))
         schema.accepts?(instance)
       end
     end

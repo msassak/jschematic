@@ -25,6 +25,10 @@ module Jschematic
       self.class.to_s
     end
 
+    def schema_for(ref)
+      parent && parent.schema_for(ref)
+    end
+
     private
 
     def fail_validation!(expected, actual)

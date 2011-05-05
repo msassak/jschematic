@@ -15,10 +15,6 @@ module Jschematic
       schema
     end
 
-    def self.schema_for(ref)
-      Context.schema_for(ref)
-    end
-
     attr_reader :default, :title, :description, :schema, :unknown_attributes
 
     attr_accessor :name
@@ -54,6 +50,10 @@ module Jschematic
 
     def required?
       children.any?{ |child| child.required? }
+    end
+
+    def schema_for(ref)
+      Context.schema_for(ref)
     end
 
     private

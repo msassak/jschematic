@@ -15,13 +15,15 @@ module Jschematic
         case @schema
         when String
           uri = Addressable::URI.parse(@schema)
-          schema = Schema.schema_for(uri)
+          schema = schema_for(uri)
           schema.accepts?(instance)
         when Hash
           Schema.new(@schema).accepts?(instance)
         when Array
           @schema.all? do |schema|
-            Extends.new(schema).accepts?(instance)
+            extends = Extends.new(schema)
+            extends.parent = self
+            extends.accepts?(instance)
           end
         end || fail_validation!(@schema, instance)
       end
