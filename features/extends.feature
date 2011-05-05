@@ -1,6 +1,6 @@
 Feature: Core schema: extends
 
-  Scenario: extending a single schema by ID
+  Background:
     Given the validation context contains this schema:
       """
       {
@@ -13,6 +13,8 @@ Feature: Core schema: extends
           }
       }
       """
+
+  Scenario: extending a single schema by ID
     When the schema is:
       """
       {
@@ -75,3 +77,39 @@ Feature: Core schema: extends
       """
 
   Scenario: extending multiple schemas
+    When the schema is:
+      """
+      {
+          "properties": {
+              "age": {
+                  "type": "integer",
+                  "required": true
+              }
+          },
+          "extends": [
+              "person",
+
+              {
+                  "properties": {
+                      "height": {
+                          "type": "number",
+                          "required": true
+                      }
+                  }
+              }
+          ]
+      }
+      """
+    Then this is valid JSON:
+      """
+      {
+          "name": "Felizberto Albi Perez Fernandez Mariposa Carlos Velasquez",
+          "age": 24,
+          "height": 5.8
+      }
+      """
+    But these are not valid JSON:
+      | { "age": 24, "height": 6 } |
+      | { "name": "Foo bar" }      |
+
+

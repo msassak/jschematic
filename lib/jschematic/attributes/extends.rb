@@ -20,8 +20,10 @@ module Jschematic
         when Hash
           Schema.new(@schema).accepts?(instance)
         when Array
-          puts "Array of literal schemas"
-        end
+          @schema.all? do |schema|
+            Extends.new(schema).accepts?(instance)
+          end
+        end || fail_validation!(@schema, instance)
       end
     end
   end
